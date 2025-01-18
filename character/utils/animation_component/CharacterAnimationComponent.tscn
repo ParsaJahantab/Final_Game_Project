@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqsee8606d6oh"]
+
+[ext_resource type="Script" path="res://character/utils/animation_component/CharacterAnimationComponent.gd" id="1_51mbt"]
+
+[node name="CharacterAnimationComponent" type="Node2D"]
+script = ExtResource("1_51mbt")

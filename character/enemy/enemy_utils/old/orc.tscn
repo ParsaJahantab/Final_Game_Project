@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://drr6lnmvgol5b"]
+
+[ext_resource type="PackedScene" uid="uid://213ge6qvp11i" path="res://character/enemy/enemy_utils/old/enemy.tscn" id="1_rpo66"]
+
+[node name="Enemy" instance=ExtResource("1_rpo66")]

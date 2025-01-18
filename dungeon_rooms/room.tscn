@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0sw4gudbyxxp"]
+
+[ext_resource type="Script" path="res://dungeon_rooms/room.gd" id="1_jmpsw"]
+[ext_resource type="PackedScene" uid="uid://m2srsaljg205" path="res://dungeon_rooms/dungeon_tile_map.tscn" id="3_7b3t1"]
+
+[node name="Room" type="Node2D"]
+light_mask = 31
+visibility_layer = 31
+texture_filter = 1
+script = ExtResource("1_jmpsw")
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="DungeonTileMap" parent="." instance=ExtResource("3_7b3t1")]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="BlockingSpikes" type="Node2D" parent="."]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds24io0fqobfs"]
+
+[ext_resource type="Script" path="res://dungeon_rooms/room_utils/graph_genreator/graph.gd" id="1_pcjdi"]
+
+[node name="Graph" type="Node"]
+script = ExtResource("1_pcjdi")

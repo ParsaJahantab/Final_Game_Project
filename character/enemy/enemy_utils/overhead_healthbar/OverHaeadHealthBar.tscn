@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://clxugja1qmwse"]
+
+[ext_resource type="Script" path="res://character/enemy/enemy_utils/overhead_healthbar/OverHaeadHealthBar.gd" id="1_giucd"]
+[ext_resource type="Texture2D" uid="uid://cyvhai87pepu4" path="res://assets/gui_assests/healthbarProgress.png" id="2_nx67j"]
+
+[node name="OverHaeadHealthBar" type="Node2D"]
+script = ExtResource("1_giucd")
+
+[node name="OverHaeadHealthBar" type="TextureProgressBar" parent="."]
+offset_left = -8.33333
+offset_top = -13.3333
+offset_right = 55.6667
+offset_bottom = 1.66667
+scale = Vector2(0.25, 0.25)
+value = 100.0
+texture_progress = ExtResource("2_nx67j")
+metadata/_edit_use_anchors_ = true
