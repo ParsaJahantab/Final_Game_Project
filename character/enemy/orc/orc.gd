@@ -13,4 +13,4 @@ func _ready():
 
 
 func _on_hurt_box_area_entered(area):
-	take_damage(area.get_parent().get_parent().get_parent().damage,((position - player.position).normalized()),combat_component.knockback_power)
+	take_damage(area.get_parent().damage,((position - player.position).normalized()),combat_component.knockback_power)

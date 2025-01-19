@@ -4,11 +4,13 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await get_tree().process_frame
 	player.health_changed.connect(update)
+	$CanvasLayer/HealthBar.max_value= player.health_component.max_health
 	update()
 
 func update():
-	$CanvasLayer/HealthBar.value = player.current_health
+	$CanvasLayer/HealthBar.value = player.health_component.current_health
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

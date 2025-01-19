@@ -5,6 +5,45 @@
 [ext_resource type="Texture2D" uid="uid://ctjkqm6c7t2ke" path="res://used_assests/orc/Orc.png" id="2_lif7e"]
 [ext_resource type="PackedScene" uid="uid://clxugja1qmwse" path="res://character/enemy/enemy_utils/overhead_healthbar/OverHaeadHealthBar.tscn" id="4_8mo01"]
 
+[sub_resource type="Animation" id="Animation_e1bnq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CharacterCombatComponent/HitBox/HitCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CharacterCombatComponent/HitBox/HitCollision:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, 8)]
+}
+
 [sub_resource type="Animation" id="Animation_2d5lc"]
 resource_name = "attackLeft"
 length = 0.6
@@ -55,45 +94,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_e1bnq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(1, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../CharacterCombatComponent/HitBox/HitCollision:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../CharacterCombatComponent/HitBox/HitCollision:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(15, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_df1vy"]
@@ -374,7 +374,11 @@ position = Vector2(15, 8)
 shape = SubResource("CircleShape2D_ckr60")
 disabled = true
 
+[node name="NavigationAgent2D" parent="EnemyNavigationComponent" index="0"]
+avoidance_enabled = true
+
 [node name="Sprite2D" parent="." index="5"]
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_lif7e")
 flip_h = true
 hframes = 8

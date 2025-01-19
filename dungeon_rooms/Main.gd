@@ -27,7 +27,7 @@ func _ready():
 	graph_generator = GraphGenerator.new()
 	randomize()
 	generate_new_level()
-	move_child($Player, get_child_count() - 1)
+	move_child($Player1, get_child_count() - 1)
 	
 func generate_new_level():
 	# Create the initial random graph
@@ -111,12 +111,12 @@ func change_room(index:int,direction):
 		if direction == "left": 
 			new_player_pos = Vector2(
 				current_room.position.x + (-2 * tile_size),
-				current_room.position.y + (current_room.left_spike_y * tile_size) + + tile_size
+				current_room.position.y + (current_room.left_spike_y * tile_size)
 		)
 		elif direction == "right": 
 			new_player_pos = Vector2(
 				current_room.position.x + (2 * tile_size) + (current_room.tiles_x * tile_size),
-				current_room.position.y + (current_room.right_spike_y * tile_size) + tile_size
+				current_room.position.y + (current_room.right_spike_y * tile_size)
 		)
 		elif direction == "top": 
 			new_player_pos = Vector2(
