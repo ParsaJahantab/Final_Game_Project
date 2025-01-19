@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://1h5g72tawslb"]
+
+[ext_resource type="Script" path="res://ui/hud/currency_UI/CurrencyUI.gd" id="1_dv171"]
+[ext_resource type="Texture2D" uid="uid://bn7ocutymc67u" path="res://used_assests/gui/healthbar/healthbarUnder.png" id="2_eaxnk"]
+
+[node name="CurrencyUi" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dv171")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -15.0
+offset_right = 80.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_eaxnk")
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 171.0
+offset_bottom = 28.0
+scale = Vector2(0.8, 0.8)
+horizontal_alignment = 1

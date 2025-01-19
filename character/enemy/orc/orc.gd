@@ -3,10 +3,11 @@ extends BaseEnemy
 
 func _ready():
 	super._ready()
-	health_component.max_health = 60
+	health_component.max_health = 240
 	movement_component.speed = 60.0
 	combat_component.damage = 30
 	combat_component.knockback_power = 700
+	currency_component.currency = 30
 	
 
 	

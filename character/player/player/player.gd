@@ -20,6 +20,7 @@ func _ready() -> void:
 	health_component.initialize(self)
 	health_component.max_health = 100
 	health_component.current_health = 100
+	_health_changed()
 	movement_component.speed = 150.0
 	$hitBox/CollisionShape2D.disabled = true
 	

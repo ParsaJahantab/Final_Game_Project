@@ -8,6 +8,9 @@ func _ready():
 	
 func initialize(parent: CharacterBody2D) -> void:
 	entity = parent
+	
+func change_stat(multiplier:float,stat:int,type:String):
+	pass
 
 func _process(delta):
 	pass

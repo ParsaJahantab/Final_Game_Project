@@ -23,3 +23,8 @@ func end_attack() -> void:
 	is_attacking = false
 	hitbox_collision.disabled = true
 	attack_finished.emit()
+	
+func change_stat(multiplier:float,stat:int,type:String):
+	damage = (damage * multiplier) + stat
+	if type == "enemy":
+		damage = randi_range(0.8 * damage, 1.2 * damage)

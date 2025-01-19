@@ -16,3 +16,8 @@ func apply_knockback(source_position: Vector2,absorbed_knockback : float) -> voi
 	if entity:
 		entity.velocity = velocity
 		entity.move_and_slide()
+
+func change_stat(multiplier:float,stat:int,type:String):
+	speed = (speed * multiplier) + stat
+	if type == "enemy":
+		speed = randi_range(0.8 * speed, 1.2 * speed)

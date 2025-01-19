@@ -9,7 +9,7 @@ var max_size = 30
 var hspread = 200
 var cull = 0.5
 var drew_once = false
-
+var level = 2
 var graph_generator: GraphGenerator
 var current_graph: Array
 var spanning_tree: Dictionary
@@ -56,9 +56,9 @@ func process_rooms():
 		)
 		var r = Room.instantiate()
 		if node.id == 0 : 
-			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.FIRST,Vector2(w, h) * tile_size , tile_size)
+			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.FIRST,Vector2(w, h) * tile_size , tile_size,level)
 		else :	
-			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.NORMAL,Vector2(w, h) * tile_size , tile_size)
+			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.NORMAL,Vector2(w, h) * tile_size , tile_size,level)
 		
 		r.make_room(Vector2(pos.x,pos.y * -1))
 		#r.visible = false

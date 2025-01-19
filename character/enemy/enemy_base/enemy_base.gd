@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var navigation_component: EnemyNavigationComponent = $EnemyNavigationComponent
 @onready var combat_component: CharacterCombatComponent = $CharacterCombatComponent
 @onready var animation_component: CharacterAnimationComponent = $CharacterAnimationComponent
+@onready var currency_component: EnemyCurrencyComponent = $EnemyCurrencyComponent
 @export var player: Node2D
 
 var is_hurt: bool = false
@@ -14,7 +15,7 @@ signal health_changed
 signal enemy_killed
 
 func _ready() -> void:
-	for component in [$CharacterHealthComponent, $CharacterMovementComponent, $EnemyNavigationComponent, $CharacterCombatComponent, $CharacterAnimationComponent]:
+	for component in [$CharacterHealthComponent, $CharacterMovementComponent, $EnemyNavigationComponent, $CharacterCombatComponent, $CharacterAnimationComponent, $EnemyCurrencyComponent]:
 		component.initialize(self)
 	
 	navigation_component.target = player
@@ -22,6 +23,20 @@ func _ready() -> void:
 	health_component.health_changed.connect(_on_health_change)
 	combat_component.attack_started.connect(_on_attack_started)
 	#combat_component.attack_finished.connect(_on_attack_finished)
+
+func initialize(level):
+	
+	var multipler = {
+	1: 1,
+	2: 1.2,
+	3: 1.4,
+	4: 1.6,
+	5: 2.0,
+	}
+	await get_tree().create_timer(0).timeout
+
+	for component in [$CharacterHealthComponent, $CharacterMovementComponent, $EnemyNavigationComponent, $CharacterCombatComponent, $CharacterAnimationComponent, $EnemyCurrencyComponent]:
+		component.change_stat(multipler[level],0,"enemy")
 
 func _physics_process(delta: float) -> void:
 	if is_hurt or combat_component.is_attacking or is_dead:
@@ -60,6 +75,7 @@ func _on_died() -> void:
 	animation_component.play("dead")
 	await animation_component.animation_player.animation_finished
 	enemy_killed.emit()
+	GameState.currency_change(currency_component.currency)
 	queue_free()
 
 func _on_attack_started() -> void:

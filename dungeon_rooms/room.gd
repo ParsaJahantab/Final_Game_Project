@@ -96,11 +96,11 @@ var rng := RandomNumberGenerator.new()
 var room_id: int
 var connections: Dictionary
 var player_been_here = false
-
+var _level : int
 # Node references using onready
 @onready var tile_map: TileMap = $DungeonTileMap
 
-func init(p_room_id: int, p_connected_rooms: Dictionary, p_player: Node2D, p_diff: GlobalConfig.Room_diff, p_type: GlobalConfig.Room_type, p_size: Vector2, p_tile_size: float) -> void:
+func init(p_room_id: int, p_connected_rooms: Dictionary, p_player: Node2D, p_diff: GlobalConfig.Room_diff, p_type: GlobalConfig.Room_type, p_size: Vector2, p_tile_size: float , level:int) -> void:
 	room_id = p_room_id
 	connections = p_connected_rooms
 	player = p_player
@@ -108,6 +108,7 @@ func init(p_room_id: int, p_connected_rooms: Dictionary, p_player: Node2D, p_dif
 	room_type = p_type
 	size = p_size
 	tile_size = p_tile_size
+	_level = level
 	
 	tiles_x = int(size.x / tile_size)
 	tiles_y = int(size.y / tile_size)
@@ -266,11 +267,13 @@ func spawn_enemies() -> void:
 		add_child(spawn_explosion)
 		spawn_explosion.get_node("AnimationPlayer").play(&"explode")
 		
-		var enemy: CharacterBody2D = ENEMY_SCENES[random_enemy].instantiate()
+		var enemy: BaseEnemy = ENEMY_SCENES[random_enemy].instantiate()
 		enemy.player = player
 		enemy.enemy_killed.connect(_on_enemy_killed)
-		call_deferred("add_child", enemy)
+		#call_deferred("add_child", enemy)
+		add_child(enemy)
 		enemy.position = enemy_position
+		enemy.initialize(_level)
 
 func fill_floor_tiles() -> void:
 	if not tile_map:

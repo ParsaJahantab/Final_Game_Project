@@ -1,10 +1,13 @@
 extends Control
 
-@export var player:Node2D
+var player:Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	player = get_parent().player
 	player.health_changed.connect(update)
 	$CanvasLayer/HealthBar.max_value= player.health_component.max_health
 	update()
