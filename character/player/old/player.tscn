@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://0fq0vuaplc4m"]
 
-[ext_resource type="Script" path="res://character/player/player.gd" id="1_tnubt"]
+[ext_resource type="Script" path="res://character/player/old/player.gd" id="1_tnubt"]
 [ext_resource type="Texture2D" uid="uid://srnq2xbp2jut" path="res://assets/Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue/SpriteSheet.png" id="2_2ixxs"]
 [ext_resource type="AudioStream" uid="uid://dhauwbxfi4v04" path="res://assets/Ninja Adventure - Asset Pack/Sounds/Game/Hit5.wav" id="3_iiobj"]
 [ext_resource type="PackedScene" uid="uid://yqq00itrfsnv" path="res://weapons/sword.tscn" id="3_sy45t"]
@@ -696,7 +696,7 @@ _data = {
 "hurtEffect": SubResource("Animation_2q0xr")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="OldPlayer" type="CharacterBody2D"]
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(7, 6)

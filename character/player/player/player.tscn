@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://dee1u13mp6850"]
 
-[ext_resource type="Script" path="res://character/player/new_player/player_1.gd" id="1_6gjjk"]
+[ext_resource type="Script" path="res://character/player/player/player.gd" id="1_2cj5x"]
 [ext_resource type="PackedScene" uid="uid://cvvy735hirreb" path="res://character/utils/health_component/character_health_component.tscn" id="1_gsbau"]
 [ext_resource type="PackedScene" uid="uid://da6xrlefp6it5" path="res://character/utils/movement_component/character_movement_component.tscn" id="2_17pqn"]
 [ext_resource type="PackedScene" uid="uid://ckhywnhyq7ff7" path="res://character/player/player_utils/weapon_component/WeaponComponent.tscn" id="4_6nfo6"]
@@ -364,13 +364,13 @@ size = Vector2(14.25, 5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1d44"]
 radius = 15.0333
 
-[node name="Player1" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 collision_layer = 17
 collision_mask = 17
-script = ExtResource("1_6gjjk")
+script = ExtResource("1_2cj5x")
 
 [node name="CharacterHealthComponent" parent="." instance=ExtResource("1_gsbau")]
 
@@ -456,5 +456,8 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 position = Vector2(-28, 19)
 shape = SubResource("CircleShape2D_t1d44")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, 8)
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

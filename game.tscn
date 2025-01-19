@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ja1m2adl7usr" path="res://assets/v1.1 dungeon crawler 16X16 pixel pack/full spritesheet.png" id="1_1im3c"]
 [ext_resource type="Texture2D" uid="uid://dp6pafh56ia41" path="res://assets/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="2_s4nt4"]
-[ext_resource type="PackedScene" uid="uid://0fq0vuaplc4m" path="res://character/player/player.tscn" id="3_1s6on"]
+[ext_resource type="PackedScene" uid="uid://0fq0vuaplc4m" path="res://character/player/old/player.tscn" id="3_1s6on"]
 [ext_resource type="PackedScene" uid="uid://213ge6qvp11i" path="res://character/enemy/enemy_utils/old/enemy.tscn" id="6_gai6k"]
 [ext_resource type="Texture2D" uid="uid://dg3sdo8lvjkks" path="res://assets/gui_assests/healthbarUnder.png" id="7_qos65"]
 [ext_resource type="Texture2D" uid="uid://cyvhai87pepu4" path="res://assets/gui_assests/healthbarProgress.png" id="8_8kvyr"]

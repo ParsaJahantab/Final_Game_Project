@@ -27,7 +27,7 @@ func _ready():
 	graph_generator = GraphGenerator.new()
 	randomize()
 	generate_new_level()
-	move_child($Player1, get_child_count() - 1)
+	move_child($Player, get_child_count() - 1)
 	
 func generate_new_level():
 	# Create the initial random graph

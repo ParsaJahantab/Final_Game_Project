@@ -2,18 +2,15 @@
 
 [ext_resource type="Script" path="res://dungeon_rooms/Main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cw5ildqrpao45" path="res://gui/health_bar/health_bar.tscn" id="3_2wsxf"]
-[ext_resource type="PackedScene" uid="uid://dee1u13mp6850" path="res://character/player/new_player/player_1.tscn" id="3_cqcrb"]
+[ext_resource type="PackedScene" uid="uid://dee1u13mp6850" path="res://character/player/player/player.tscn" id="3_cqcrb"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1")
-player = NodePath("Player1")
+player = NodePath("Player")
 
 [node name="Rooms" type="Node" parent="."]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_2wsxf")]
-player = NodePath("../Player1")
+player = NodePath("../Player")
 
-[node name="Player1" parent="." instance=ExtResource("3_cqcrb")]
-
-[node name="Camera2D" type="Camera2D" parent="Player1"]
-position = Vector2(1, 8)
+[node name="Player" parent="." instance=ExtResource("3_cqcrb")]
