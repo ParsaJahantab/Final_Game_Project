@@ -10,7 +10,7 @@ signal health_changed
 signal attack_pressed
 var weapon := "Sword"
 var is_attacking: bool
-var damage = 50
+var damage = 100
 func _ready() -> void:
 	# Connect signals
 	await get_tree().process_frame
