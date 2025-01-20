@@ -6,8 +6,6 @@ var tile_size = 16
 var num_rooms = 5
 var min_size = 15
 var max_size = 30
-var hspread = 200
-var cull = 0.5
 var drew_once = false
 var level = 2
 var graph_generator: GraphGenerator
