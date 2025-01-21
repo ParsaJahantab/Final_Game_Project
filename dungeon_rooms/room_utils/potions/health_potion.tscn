@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4jxne6gcoegy"]
+
+[ext_resource type="PackedScene" uid="uid://cteodj5f2npud" path="res://dungeon_rooms/room_utils/potions/base_potion.tscn" id="1_ekjdw"]
+[ext_resource type="Texture2D" uid="uid://cymywc2u0mjxe" path="res://used_assests/potions/Heart.png" id="2_oe43f"]
+[ext_resource type="Script" path="res://dungeon_rooms/room_utils/potions/health_potion.gd" id="2_smgtd"]
+
+[node name="HealthPotion" instance=ExtResource("1_ekjdw")]
+script = ExtResource("2_smgtd")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_oe43f")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

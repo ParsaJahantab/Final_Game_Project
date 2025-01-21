@@ -9,10 +9,12 @@ visibility_layer = 31
 texture_filter = 1
 script = ExtResource("1_jmpsw")
 
-[node name="Enemies" type="Node" parent="."]
-
 [node name="DungeonTileMap" parent="." instance=ExtResource("3_7b3t1")]
 
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="BlockingSpikes" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Explosions" type="Node2D" parent="."]

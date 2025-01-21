@@ -24,7 +24,8 @@ func _ready() -> void:
 	combat_component.attack_started.connect(_on_attack_started)
 	#combat_component.attack_finished.connect(_on_attack_finished)
 
-func initialize(level):
+func initialize(p_position: Vector2,level):
+	position = p_position
 	
 	var multipler = {
 	1: 1,
@@ -33,10 +34,10 @@ func initialize(level):
 	4: 1.6,
 	5: 2.0,
 	}
-	await get_tree().create_timer(0).timeout
 
 	for component in [$CharacterHealthComponent, $CharacterMovementComponent, $EnemyNavigationComponent, $CharacterCombatComponent, $CharacterAnimationComponent, $EnemyCurrencyComponent]:
 		component.change_stat(multipler[level],0,"enemy")
+	disable_enemy()
 
 func _physics_process(delta: float) -> void:
 	if is_hurt or combat_component.is_attacking or is_dead:
@@ -54,13 +55,23 @@ func _physics_process(delta: float) -> void:
 		await animation_component.animation_player.animation_finished
 		combat_component.end_attack()
 		
-
+func disable_enemy():
+	set_physics_process(false)
+	set_process(false)
+	visible = false
+	
+func activate_enemy():
+	set_physics_process(true)
+	set_process(true)
+	visible = true
 
 func take_damage(amount: int, source_position: Vector2, absorbed_knockback : float) -> void:
 	is_hurt = true
 	combat_component.is_attacking = false
 	if not combat_component.hitbox_collision.disabled :
-		combat_component.hitbox_collision.disabled = true
+		#combat_component.hitbox_collision.set_disabled(true)
+		call_deferred("combat_component.hitbox_collision.set_disabled",true)
+		
 	health_component.take_damage(amount)
 	movement_component.apply_knockback(source_position,absorbed_knockback)
 	animation_component.play("hurt")
@@ -68,6 +79,8 @@ func take_damage(amount: int, source_position: Vector2, absorbed_knockback : flo
 	is_hurt = false
 
 func _on_died() -> void:
+	call_deferred("_handle_death")
+func _handle_death() -> void:
 	is_dead = true
 	animation_component.animation_player.stop()
 	animation_component.play("hurt")

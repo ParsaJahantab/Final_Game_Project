@@ -47,7 +47,10 @@ func create_random_graph() -> Array:
 	for i in range(num_nodes_in_main_path):
 		var node := CustomGraphNode.new(i)
 		if i != 0: 
-			available_directions = get_available_directions(node , prev_node)
+			if prev_node.id == 0:
+				available_directions = [["down","top"]]
+			else:
+				available_directions = get_available_directions(node , prev_node)
 			random_pair = available_directions[randi() % available_directions.size()]
 			#print(available_directions)
 			#print(random_pair)

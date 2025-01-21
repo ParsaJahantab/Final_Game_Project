@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bysvxdxwl6ku7"]
+[gd_scene load_steps=6 format=3 uid="uid://bysvxdxwl6ku7"]
 
 [ext_resource type="Texture2D" uid="uid://dqo4d1cwuhkw5" path="res://used_assests/spwan/enemy_afterdead_explosion_anim_spritesheet.png" id="1_nj0it"]
+[ext_resource type="Script" path="res://character/enemy/enemy_utils/spwan/spawn_explosion.gd" id="2_csvt4"]
 
 [sub_resource type="Animation" id="Animation_b44g2"]
 length = 0.001
@@ -67,6 +68,7 @@ _data = {
 texture = ExtResource("1_nj0it")
 hframes = 4
 frame = 1
+script = ExtResource("2_csvt4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

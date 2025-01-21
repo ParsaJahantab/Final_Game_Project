@@ -4,6 +4,7 @@ class_name DungeonRoom
 # Constants
 const SPAWN_EXPLOSION_SCENE := preload("res://character/enemy/enemy_utils/spwan/spawn_explosion.tscn")
 const DOOR := preload("res://dungeon_rooms/room_utils/door/door.tscn")
+const HEALTH_POTION := preload("res://dungeon_rooms/room_utils/potions/health_potion.tscn")
 const BLOCKING_SPIKE := preload("res://dungeon_rooms/room_utils/spike/blocking_spike.tscn")
 const ENEMY_SCENES := {
 	&"GOBLIN": preload("res://character/enemy/goblin/goblin.tscn")
@@ -70,7 +71,11 @@ const VARIATION_CHANCE := 0.25
 const COLLISION_AREA_OFFSET := 72.0
 const AREA_SIZE := Vector2(64, 64)
 
-signal direction_detected(id:int ,direction: String)
+const POTION_SPAWN_CHANCE := 0.4  
+const MAX_POTIONS := 2
+const POTION_CLEARANCE := 3  
+
+signal direction_detected(id:int ,direction: String,exit:bool)
 
 # Properties with type hints
 @export var room_size: GlobalConfig.Room_size
@@ -90,6 +95,8 @@ var room_enemy_power: float
 var num_of_enemies: int
 var is_in_conflict: bool
 var is_player_in_the_room : bool
+var enemies_killed := false
+var exit_dungeon_door : String
 
 var player: Node2D
 var rng := RandomNumberGenerator.new()
@@ -121,35 +128,39 @@ func init(p_room_id: int, p_connected_rooms: Dictionary, p_player: Node2D, p_dif
 	
 	if room_type == GlobalConfig.Room_type.FIRST:
 		room_enemy_power = 0
-		
+		enemies_killed = true
+	else:
+		enemies_killed = false
+	
 func _ready() -> void:
 	# Add collision areas node
 	add_child(collision_areas)
 	collision_areas.name = "CollisionAreas"
 
 func _setup_doors() -> void:
-	# Setup top door if connection exists
-	if connections["top"] != null:
+	if (connections["top"] != null) or (room_type == GlobalConfig.Room_type.LAST and connections["top"] == null):
 		top_door_x = rng.randi_range(3, tiles_x - 3)
 		var top_door = DOOR.instantiate()
 		# top_door.position = Vector2(position.x + (top_door_x * tile_size), position.y + tile_size)
 		top_door.position = Vector2(top_door_x * tile_size, tile_size)
 		top_door.entred.connect(_on_body_entered)
 		$Doors.add_child(top_door)
-
+		if room_type == GlobalConfig.Room_type.LAST and connections["top"] == null:
+			exit_dungeon_door = "top"
 		var top_area = _create_collision_area("top")
 		top_area.position = Vector2(top_door_x * tile_size, COLLISION_AREA_OFFSET * -1) # Put it at the top edge
 		collision_areas.add_child(top_area)
 	
 	# Setup bottom door if connection exists
-	if connections["down"] != null:
+	if connections["down"] != null or (room_type == GlobalConfig.Room_type.LAST and connections["down"] == null and connections["top"] != null):
 		bottom_door_x = rng.randi_range(3, tiles_x - 3)
 		var bottom_door = DOOR.instantiate()
 		# bottom_door.position = Vector2(position.x + (bottom_door_x * tile_size),position.y+ (tiles_y - 1) * tile_size)
 		bottom_door.position = Vector2((bottom_door_x * tile_size), (tiles_y - 1) * tile_size)
 		bottom_door.entred.connect(_on_body_entered)
 		$Doors.add_child(bottom_door)
-		
+		if room_type == GlobalConfig.Room_type.LAST and connections["down"] == null:
+			exit_dungeon_door = "down"
 		var bottom_area = _create_collision_area("down")
 		bottom_area.position = Vector2(bottom_door_x * tile_size, (tiles_y * tile_size) + COLLISION_AREA_OFFSET )# Put it at the bottom edge
 		collision_areas.add_child(bottom_area)
@@ -158,10 +169,18 @@ func _on_body_entered() -> void:
 	is_player_in_the_room = true
 	if not player_been_here : 
 		player_been_here = true
-	if room_enemy_power > 0 and not is_in_conflict:
+	if not is_in_conflict and not enemies_killed:
 		is_in_conflict = true
 		close_all()
-		spawn_enemies()
+		activate_room()
+		
+func activate_room():
+	for enemy in $Enemies.get_children():
+		enemy.activate_enemy()
+	for spawn_explosion in $Explosions.get_children():
+		spawn_explosion.visible = true
+		spawn_explosion.get_node("AnimationPlayer").play(&"explode")
+
 		
 func _setup_spikes() -> void:
 	# Setup right spike if connection exists
@@ -215,17 +234,19 @@ func _create_collision_area(direction: String) -> Area2D:
 	var shape = RectangleShape2D.new()
 	shape.size = AREA_SIZE
 	collision_shape.shape = shape
-	
+	var exiting = false
 	# Set up collision properties
 	area.collision_layer = 1
 	area.collision_mask = 1  # Layer 5 (1 << 4)
-	
+	if room_type == GlobalConfig.Room_type.LAST and ((direction == "top" and exit_dungeon_door == "top") or (direction == "down" and exit_dungeon_door == "down")):
+		exiting = true
+		
 	
 	
 	area.body_entered.connect(
 		func(_body): 
 			#print("Detected collision from: ", direction)  # Debug print
-			direction_detected.emit(room_id,direction)
+			direction_detected.emit(room_id,direction,exiting)
 	)
 	
 	area.add_child(collision_shape)
@@ -262,18 +283,77 @@ func spawn_enemies() -> void:
 			rng.randi_range(3, tiles_y - 3) * tile_size
 		)
 		
-		var spawn_explosion: Sprite2D = SPAWN_EXPLOSION_SCENE.instantiate()
-		spawn_explosion.position = enemy_position
-		add_child(spawn_explosion)
-		spawn_explosion.get_node("AnimationPlayer").play(&"explode")
+		
 		
 		var enemy: BaseEnemy = ENEMY_SCENES[random_enemy].instantiate()
 		enemy.player = player
 		enemy.enemy_killed.connect(_on_enemy_killed)
 		#call_deferred("add_child", enemy)
-		add_child(enemy)
-		enemy.position = enemy_position
-		enemy.initialize(_level)
+		$Enemies.call_deferred("add_child", enemy)
+		enemy.call_deferred("initialize",enemy_position, _level)
+		var spawn_explosion: Sprite2D = SPAWN_EXPLOSION_SCENE.instantiate()
+		$Explosions.call_deferred("add_child", spawn_explosion)
+		spawn_explosion.call_deferred("initialize",enemy_position)
+	
+func spawn_health_potions() -> void:
+	if randf() > POTION_SPAWN_CHANCE:
+		return
+		
+	var num_potions := rng.randi_range(1, MAX_POTIONS)
+	var placed_potions := []
+	var attempts := 0
+	const MAX_ATTEMPTS := 50
+	
+	while placed_potions.size() < num_potions and attempts < MAX_ATTEMPTS:
+		var potion_position := _get_valid_potion_position(placed_potions)
+		if potion_position:
+			var potion = HEALTH_POTION.instantiate()
+			add_child(potion)
+			potion.position = potion_position
+			placed_potions.append(potion_position)
+		attempts += 1
+
+func _get_valid_potion_position(placed_positions: Array) -> Vector2:
+	var x := rng.randi_range(3, tiles_x - 3) * tile_size
+	var y := rng.randi_range(3, tiles_y - 3) * tile_size
+	var pos := Vector2(x, y)
+	
+	# Check distance from doors
+	if connections["top"] != null:
+		var top_door_pos := Vector2(top_door_x * tile_size, tile_size)
+		if pos.distance_to(top_door_pos) < POTION_CLEARANCE * tile_size:
+			return Vector2.ZERO
+	
+	if connections["down"] != null:
+		var bottom_door_pos := Vector2(bottom_door_x * tile_size, (tiles_y - 1) * tile_size)
+		if pos.distance_to(bottom_door_pos) < POTION_CLEARANCE * tile_size:
+			return Vector2.ZERO
+	
+	# Check distance from spikes
+	if connections["left"] != null:
+		var left_spike_pos := Vector2(tile_size, (left_spike_y + 1) * tile_size)
+		if pos.distance_to(left_spike_pos) < POTION_CLEARANCE * tile_size:
+			return Vector2.ZERO
+	
+	if connections["right"] != null:
+		var right_spike_pos := Vector2((tiles_x - 1) * tile_size, (right_spike_y + 1) * tile_size)
+		if pos.distance_to(right_spike_pos) < POTION_CLEARANCE * tile_size:
+			return Vector2.ZERO
+	
+	# Check distance from other potions
+	for other_pos in placed_positions:
+		if pos.distance_to(other_pos) < POTION_CLEARANCE * tile_size:
+			return Vector2.ZERO
+	
+	# Check distance from decorations
+	for cell_pos in tile_map.get_used_cells(0):
+		var cell_world_pos := Vector2(cell_pos.x * tile_size, cell_pos.y * tile_size)
+		if pos.distance_to(cell_world_pos) < POTION_CLEARANCE * tile_size:
+			var cell_data := tile_map.get_cell_atlas_coords(0, cell_pos)
+			if cell_data in DECORATIONS:
+				return Vector2.ZERO
+	
+	return pos
 
 func fill_floor_tiles() -> void:
 	if not tile_map:
@@ -283,6 +363,8 @@ func fill_floor_tiles() -> void:
 	_place_floor_tiles()
 	_place_wall_tiles()
 	_place_decorations()
+	spawn_enemies()
+	spawn_health_potions()
 
 func _place_floor_tiles() -> void:
 	for x in range(tiles_x + 1):
@@ -300,7 +382,7 @@ func _place_wall_tiles() -> void:
 	# Top wall and second row
 	for x in range(tiles_x):
 		# Top wall - skip if there's a door
-		if connections["top"] == null or (x != top_door_x and x != top_door_x - 1):
+		if (connections["top"] == null and exit_dungeon_door!="top") or (x != top_door_x and x != top_door_x - 1):
 			var wall_type := _get_wall_type(x)
 			tile_map.set_cell(0, Vector2i(x, 0), 1, wall_type)
 			
@@ -311,7 +393,7 @@ func _place_wall_tiles() -> void:
 	# Bottom walls and second-to-last row
 	for x in range(tiles_x):
 		# Bottom wall - skip if there's a door
-		if connections["down"] == null or (x != bottom_door_x and x != bottom_door_x - 1):
+		if (connections["down"] == null and exit_dungeon_door != "down") or (x != bottom_door_x and x != bottom_door_x - 1) :
 			var wall_coord := _get_wall_pattern_tile(x)
 			tile_map.set_cell(0, Vector2i(x, tiles_y - 1), 1, wall_coord)
 			
@@ -416,5 +498,6 @@ func close_all() -> void:
 func _on_enemy_killed() -> void:
 	num_of_enemies -= 1
 	if num_of_enemies == 0:
+		enemies_killed = true
 		open_all()
 		is_in_conflict = false

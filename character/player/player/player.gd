@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var movement_component: CharacterMovementComponent = $CharacterMovementComponent
-@onready var weapon_component: WeaponComponent = $WeaponComponent
 @onready var health_component: CharacterHealthComponent= $CharacterHealthComponent
 @onready var animation_component: PlayerAnimationComponent = $PlayerAnimationComponent
 @export var knockback_power: float = 500.0

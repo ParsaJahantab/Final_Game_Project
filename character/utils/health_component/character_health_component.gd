@@ -22,6 +22,10 @@ func take_damage(amount: int) -> void:
 		is_dead = true
 		died.emit()
 		
+func heal(amount: int) -> void:
+	current_health = min(max_health,current_health + amount)
+	health_changed.emit()
+		
 func change_stat(multiplier:float,stat:int,type:String):
 	max_health = (max_health * multiplier) + stat
 	

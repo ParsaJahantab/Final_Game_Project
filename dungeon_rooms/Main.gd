@@ -55,6 +55,8 @@ func process_rooms():
 		var r = Room.instantiate()
 		if node.id == 0 : 
 			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.FIRST,Vector2(w, h) * tile_size , tile_size,level)
+		elif node.id == current_graph.size()-1:
+			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.LAST,Vector2(w, h) * tile_size , tile_size,level)
 		else :	
 			r.init(node.id,node.connections,player,GlobalConfig.Room_diff.EASY , GlobalConfig.Room_type.NORMAL,Vector2(w, h) * tile_size , tile_size,level)
 		
@@ -81,8 +83,10 @@ func _draw():
 			room.fill_floor_tiles()
 		drew_once =  true 
 	
-func on_player_exit(id,direction):
-	if current_room.player_been_here and current_room.is_player_in_the_room:
+func on_player_exit(id,direction,exit):
+	if exit:
+		queue_free()
+	elif current_room.player_been_here and current_room.is_player_in_the_room:
 		#print("id: " , id , " signal: ",direction)
 		#print(current_room.connections[direction])
 		var opposites = {
