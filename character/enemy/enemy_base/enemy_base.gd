@@ -88,7 +88,7 @@ func _handle_death() -> void:
 	animation_component.play("dead")
 	await animation_component.animation_player.animation_finished
 	enemy_killed.emit()
-	GameState.currency_change(currency_component.currency)
+	GameState.temp_currency_change(currency_component.currency)
 	queue_free()
 
 func _on_attack_started() -> void:
