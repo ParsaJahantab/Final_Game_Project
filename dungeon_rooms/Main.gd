@@ -85,6 +85,8 @@ func _draw():
 	
 func on_player_exit(id,direction,exit):
 	if exit:
+		GameState.currency_change(GameState.temp_player_currency)
+		GameState.temp_currency_change(GameState.temp_player_currency * -1)
 		queue_free()
 	elif current_room.player_been_here and current_room.is_player_in_the_room:
 		#print("id: " , id , " signal: ",direction)
