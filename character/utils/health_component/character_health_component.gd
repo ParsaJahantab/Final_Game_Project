@@ -23,12 +23,13 @@ func take_damage(amount: int) -> void:
 		died.emit()
 		
 func change_stat(multiplier:float,stat:int,type:String):
-	print(max_health)
-	current_health = (max_health * multiplier) + stat
-	if type == "enemy":
-		current_health = randi_range(0.8 * current_health, 1.2 * current_health)
+	max_health = (max_health * multiplier) + stat
 	
-	print(current_health)
+	if type == "enemy":
+		max_health = randi_range(0.8 * max_health, 1.2 * max_health)
+	
+	current_health = max_health
+	
 	health_changed.emit()
 	
 	

@@ -9,7 +9,9 @@ func _ready():
 	update()
 
 func update():
+	overhaead_healthbar.max_value = entity.health_component.max_health
 	overhaead_healthbar.value = entity.health_component.current_health
+	
 
 func _process(_delta):
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbt5m2uyw613v"]
+[gd_scene load_steps=9 format=3 uid="uid://dbt5m2uyw613v"]
 
 [ext_resource type="PackedScene" uid="uid://dqsee8606d6oh" path="res://character/utils/animation_component/CharacterAnimationComponent.tscn" id="1_0leq7"]
 [ext_resource type="Script" path="res://character/enemy/enemy_base/enemy_base.gd" id="1_1ida0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dg2evnb4w4prs" path="res://character/enemy/enemy_utils/navigation_component/EnemyNavigationComponent.tscn" id="4_a0yix"]
 [ext_resource type="PackedScene" uid="uid://da6xrlefp6it5" path="res://character/utils/movement_component/character_movement_component.tscn" id="5_67oyy"]
 [ext_resource type="PackedScene" uid="uid://cwnvystjw0v0w" path="res://character/enemy/enemy_utils/currency_component/EnemyCurrencyComponent.tscn" id="7_njoy2"]
+[ext_resource type="PackedScene" uid="uid://clxugja1qmwse" path="res://character/enemy/enemy_utils/overhead_healthbar/OverHaeadHealthBar.tscn" id="8_kqgw5"]
 
 [node name="EnemyBase" type="CharacterBody2D"]
 texture_filter = 1
@@ -54,5 +55,9 @@ wait_time = 0.3
 autostart = true
 
 [node name="EnemyCurrencyComponent" parent="." instance=ExtResource("7_njoy2")]
+
+[node name="OverHaeadHealthBar" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("8_kqgw5")]
+position = Vector2(0, 3)
+entity = NodePath("..")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

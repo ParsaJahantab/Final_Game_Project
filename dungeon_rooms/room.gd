@@ -6,7 +6,7 @@ const SPAWN_EXPLOSION_SCENE := preload("res://character/enemy/enemy_utils/spwan/
 const DOOR := preload("res://dungeon_rooms/room_utils/door/door.tscn")
 const BLOCKING_SPIKE := preload("res://dungeon_rooms/room_utils/spike/blocking_spike.tscn")
 const ENEMY_SCENES := {
-	&"GOBLIN": preload("res://character/enemy/orc/orc.tscn")
+	&"GOBLIN": preload("res://character/enemy/goblin/goblin.tscn")
 }
 
 const ROOM_POWER_MULTIPLIER := {

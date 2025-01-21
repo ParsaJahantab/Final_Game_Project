@@ -14,4 +14,3 @@ player = NodePath("Player")
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("3_cqcrb")]
-knockback_power = 500.0
