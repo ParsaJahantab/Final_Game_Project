@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8kpqeqg8ijqj"]
+
+[ext_resource type="PackedScene" uid="uid://d1bf4b5ebng1b" path="res://character/NPC/base_NPC/BaseNPC.tscn" id="1_e36d0"]
+[ext_resource type="Texture2D" uid="uid://djljrwfbfsbba" path="res://used_assests/ring_keeper/ZealousPriest.png" id="2_vq4jg"]
+[ext_resource type="Script" path="res://character/NPC/RingKeeper/ring_keeper.gd" id="2_wjtrk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln3sl"]
+atlas = ExtResource("2_vq4jg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mul1l"]
+atlas = ExtResource("2_vq4jg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc5fm"]
+atlas = ExtResource("2_vq4jg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og5en"]
+atlas = ExtResource("2_vq4jg")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wude4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln3sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mul1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc5fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og5en")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="RingKeeper" instance=ExtResource("1_e36d0")]
+texture_filter = 1
+position = Vector2(84, 35)
+script = ExtResource("2_wjtrk")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_wude4")
+animation = &"idle"
