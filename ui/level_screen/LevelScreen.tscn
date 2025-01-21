@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://f257c6ixuvhu"]
+
+[ext_resource type="Texture2D" uid="uid://coq3kv8ws1xlu" path="res://used_assests/gui/level_screen/panel_brown.png" id="1_iu5kb"]
+[ext_resource type="Script" path="res://ui/level_screen/LevelScreen.gd" id="1_xmihh"]
+[ext_resource type="Texture2D" uid="uid://dvr2a082t6d8e" path="res://used_assests/gui/level_screen/panel_beigeLight.png" id="2_irhne"]
+[ext_resource type="PackedScene" uid="uid://b0xdebxs6qh7m" path="res://ui/level_screen/single_level/single_level.tscn" id="3_ovmvv"]
+[ext_resource type="Texture2D" uid="uid://cgtxwje2r1fi3" path="res://used_assests/gui/level_screen/iconCheck_bronze.png" id="5_nai1g"]
+
+[node name="LevelScreen" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xmihh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 107.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("1_iu5kb")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 14.0
+offset_right = 115.0
+offset_bottom = 122.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_irhne")
+
+[node name="Mana" parent="." instance=ExtResource("3_ovmvv")]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 38.0
+offset_right = -277.0
+offset_bottom = -178.0
+
+[node name="Health" parent="." instance=ExtResource("3_ovmvv")]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 18.0
+offset_right = -277.0
+offset_bottom = -198.0
+
+[node name="Damage" parent="." instance=ExtResource("3_ovmvv")]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 58.0
+offset_right = -277.0
+offset_bottom = -158.0
+
+[node name="Speed" parent="." instance=ExtResource("3_ovmvv")]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 78.0
+offset_right = -277.0
+offset_bottom = -138.0
+
+[node name="Required" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 109.0
+offset_right = 98.0
+offset_bottom = 132.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Required mythril: "
+
+[node name="RequiredVar" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 102.0
+offset_top = 109.0
+offset_right = 181.0
+offset_bottom = 132.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+
+[node name="mythril" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 129.0
+offset_right = 99.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "mythril :"
+
+[node name="mythrilVar" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 102.0
+offset_top = 129.0
+offset_right = 181.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 153.0
+offset_right = 97.0
+offset_bottom = 173.0
+texture_normal = ExtResource("5_nai1g")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

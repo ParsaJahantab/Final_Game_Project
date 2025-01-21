@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0xdebxs6qh7m"]
+
+[ext_resource type="Texture2D" uid="uid://8lg1f2as70dk" path="res://used_assests/gui/level_screen/arrowBeige_right.png" id="1_44iwe"]
+[ext_resource type="Script" path="res://ui/level_screen/single_level/single_level.gd" id="1_tcylp"]
+[ext_resource type="Texture2D" uid="uid://b6r801gawq18o" path="res://used_assests/gui/level_screen/arrowBeige_left.png" id="2_km6qo"]
+[ext_resource type="Texture2D" uid="uid://bfrkq06in85us" path="res://used_assests/gui/level_screen/arrowBeige_right_pressed.png" id="2_l7fj1"]
+[ext_resource type="Texture2D" uid="uid://bgaf53m28a34s" path="res://used_assests/gui/level_screen/arrowBeige_left_pressed.png" id="5_xs3by"]
+
+[node name="SingleLevel" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -307.0
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_tcylp")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 147.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+
+[node name="RightButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 147.5
+offset_right = 169.5
+offset_bottom = 21.0
+texture_normal = ExtResource("1_44iwe")
+texture_pressed = ExtResource("2_l7fj1")
+
+[node name="LeftButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 77.5
+offset_right = 99.5
+offset_bottom = 21.0
+texture_normal = ExtResource("2_km6qo")
+texture_pressed = ExtResource("5_xs3by")
+
+[node name="Attribute" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
