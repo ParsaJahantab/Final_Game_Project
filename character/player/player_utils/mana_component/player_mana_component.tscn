@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://djbcfaikbhp4j"]
+
+[ext_resource type="PackedScene" uid="uid://bu4t4xk1bwepm" path="res://character/utils/base_component/character_base_component.tscn" id="1_h63qd"]
+[ext_resource type="Script" path="res://character/player/player_utils/mana_component/player_mana_component.gd" id="2_1w8rm"]
+
+[node name="PlayerManaComponent" instance=ExtResource("1_h63qd")]
+script = ExtResource("2_1w8rm")
+max_mana = 50

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccfee88oynobx"]
+
+[ext_resource type="PackedScene" uid="uid://cteodj5f2npud" path="res://dungeon_rooms/room_utils/potions/base_potion.tscn" id="1_3k715"]
+[ext_resource type="Script" path="res://dungeon_rooms/room_utils/potions/mana_potion.gd" id="2_0hm5p"]
+[ext_resource type="Texture2D" uid="uid://brjlmhqudga7n" path="res://used_assests/potions/WaterPot.png" id="3_0ty17"]
+
+[node name="ManaPotion" instance=ExtResource("1_3k715")]
+script = ExtResource("2_0hm5p")
+
+[node name="Sprite2D" parent="." index="1"]
+texture_filter = 1
+texture = ExtResource("3_0ty17")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

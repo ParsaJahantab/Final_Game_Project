@@ -5,6 +5,7 @@ class_name DungeonRoom
 const SPAWN_EXPLOSION_SCENE := preload("res://character/enemy/enemy_utils/spwan/spawn_explosion.tscn")
 const DOOR := preload("res://dungeon_rooms/room_utils/door/door.tscn")
 const HEALTH_POTION := preload("res://dungeon_rooms/room_utils/potions/health_potion.tscn")
+const MANA_POTION := preload("res://dungeon_rooms/room_utils/potions/mana_potion.tscn")
 const BLOCKING_SPIKE := preload("res://dungeon_rooms/room_utils/spike/blocking_spike.tscn")
 const ENEMY_SCENES := {
 	&"GOBLIN": preload("res://character/enemy/goblin/goblin.tscn")
@@ -295,7 +296,8 @@ func spawn_enemies() -> void:
 		$Explosions.call_deferred("add_child", spawn_explosion)
 		spawn_explosion.call_deferred("initialize",enemy_position)
 	
-func spawn_health_potions() -> void:
+func spawn_potions(potion_type) -> void:
+	
 	if randf() > POTION_SPAWN_CHANCE:
 		return
 		
@@ -307,7 +309,7 @@ func spawn_health_potions() -> void:
 	while placed_potions.size() < num_potions and attempts < MAX_ATTEMPTS:
 		var potion_position := _get_valid_potion_position(placed_potions)
 		if potion_position:
-			var potion = HEALTH_POTION.instantiate()
+			var potion = potion_type.instantiate()
 			add_child(potion)
 			potion.position = potion_position
 			placed_potions.append(potion_position)
@@ -364,7 +366,8 @@ func fill_floor_tiles() -> void:
 	_place_wall_tiles()
 	_place_decorations()
 	spawn_enemies()
-	spawn_health_potions()
+	spawn_potions(HEALTH_POTION)
+	spawn_potions(MANA_POTION)
 
 func _place_floor_tiles() -> void:
 	for x in range(tiles_x + 1):
