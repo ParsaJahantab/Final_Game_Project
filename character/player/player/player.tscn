@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dee1u13mp6850"]
+[gd_scene load_steps=29 format=3 uid="uid://dee1u13mp6850"]
 
 [ext_resource type="Script" path="res://character/player/player/player.gd" id="1_2cj5x"]
 [ext_resource type="PackedScene" uid="uid://cvvy735hirreb" path="res://character/utils/health_component/character_health_component.tscn" id="1_gsbau"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bxfw6kug6o4vm" path="res://used_assests/knight/_Idle.png" id="9_itekm"]
 [ext_resource type="Texture2D" uid="uid://bfxw31tafh8vi" path="res://used_assests/knight/_Roll.png" id="9_upxth"]
 [ext_resource type="Texture2D" uid="uid://dm1oh57dw1nqr" path="res://used_assests/knight/_Attack2.png" id="10_r0cyt"]
+[ext_resource type="PackedScene" uid="uid://djbcfaikbhp4j" path="res://character/player/player_utils/mana_component/player_mana_component.tscn" id="11_be6tu"]
 [ext_resource type="Texture2D" uid="uid://cropqw61khn45" path="res://used_assests/knight/Death.png" id="11_dc1m4"]
 
 [sub_resource type="Animation" id="Animation_it88g"]
@@ -1018,5 +1019,7 @@ shape = SubResource("CircleShape2D_t1d44")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, 8)
 position_smoothing_enabled = true
+
+[node name="PlayerManaComponent" parent="." instance=ExtResource("11_be6tu")]
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

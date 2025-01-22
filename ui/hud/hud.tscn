@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://6rllrc3pj645"]
+[gd_scene load_steps=6 format=3 uid="uid://6rllrc3pj645"]
 
 [ext_resource type="PackedScene" uid="uid://cw5ildqrpao45" path="res://ui/hud/health_bar/health_bar.tscn" id="1_0ofyl"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_63md3"]
 [ext_resource type="PackedScene" uid="uid://1h5g72tawslb" path="res://ui/hud/currency_UI/CurrencyUI.tscn" id="2_xl27d"]
 [ext_resource type="PackedScene" uid="uid://b81ksf7qy3fcq" path="res://ui/hud/menu_button/MenuBotton.tscn" id="4_abbai"]
+[ext_resource type="PackedScene" uid="uid://c5wptwl6j8nx5" path="res://ui/hud/mana_bar/mana_bar.tscn" id="5_042bq"]
 
 [node name="Hud" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,4 +23,7 @@ layout_mode = 1
 layout_mode = 1
 
 [node name="MenuBotton" parent="." instance=ExtResource("4_abbai")]
+layout_mode = 1
+
+[node name="ManaBar" parent="." instance=ExtResource("5_042bq")]
 layout_mode = 1

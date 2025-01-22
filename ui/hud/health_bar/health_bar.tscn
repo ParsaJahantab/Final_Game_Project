@@ -16,6 +16,7 @@ script = ExtResource("1_c87i0")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+texture_filter = 1
 offset_right = 64.0
 offset_bottom = 10.0
 texture_under = ExtResource("1_1jbh6")

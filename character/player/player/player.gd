@@ -2,10 +2,12 @@ extends CharacterBody2D
 
 @onready var movement_component: CharacterMovementComponent = $CharacterMovementComponent
 @onready var health_component: CharacterHealthComponent= $CharacterHealthComponent
+@onready var mana_component: PlayerManaComponent = $PlayerManaComponent
 @onready var animation_component: PlayerAnimationComponent = $PlayerAnimationComponent
 @export var knockback_power: float = 500.0
 var is_dead = false
 signal health_changed
+signal mana_changed
 signal attack_pressed
 var weapon := "Sword"
 var is_attacking: bool
@@ -19,16 +21,24 @@ func _ready() -> void:
 	await get_tree().process_frame
 	health_component.died.connect(_on_died)
 	health_component.health_changed.connect(_health_changed)
+	mana_component.mana_changed.connect(_mana_changed)
 	movement_component.initialize(self)
 	health_component.initialize(self)
+	mana_component.initialize(self)
 	health_component.max_health = 100
 	health_component.current_health = 100
+	mana_component.max_mana = 50
+	mana_component.current_mana = 50
 	_health_changed()
+	_mana_changed()
 	movement_component.speed = 150.0
 	$hitBox/CollisionShape2D.disabled = true
 	
 func _health_changed():
 	health_changed.emit()
+
+func _mana_changed():
+	mana_changed.emit()
 
 func _physics_process(_delta: float) -> void:
 	
