@@ -1,6 +1,6 @@
 extends Node2D
 
-var Room = preload("res://dungeon_rooms/Room.tscn")  
+var Room = preload("res://dungeon_rooms/room.tscn")  
 @export var player: Node2D
 var tile_size = 16
 var num_rooms = 5
