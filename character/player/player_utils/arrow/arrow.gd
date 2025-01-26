@@ -23,7 +23,6 @@ func _process(delta):
 		
 func disable():
 	set_process(false)
-	
 	$Area2D/CollisionShape2D.disabled = true
 	visible = false
 	

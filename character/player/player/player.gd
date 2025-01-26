@@ -16,7 +16,7 @@ var is_hurt = false
 signal health_changed
 signal mana_changed
 signal attack_pressed
-var weapon := "Sword"
+var weapon := "Axe"
 var is_attacking: bool
 var is_rolling : bool
 var base_damage = 100
