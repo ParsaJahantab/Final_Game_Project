@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rougelike"
-run/main_scene="res://dungeon_rooms/main.tscn"
+run/main_scene="res://dungeon_rooms/dungeon.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalConfig="*res://GlobalConfig.gd"
 GameState="*res://game_state.gd"
+SceneManager="*res://scene_manager.gd"
 
 [display]
 
