@@ -10,7 +10,7 @@ texture_filter = 1
 script = ExtResource("1_0wniy")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 10
+collision_layer = 8
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -18,3 +18,5 @@ shape = SubResource("CircleShape2D_j6782")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_d5i1e")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

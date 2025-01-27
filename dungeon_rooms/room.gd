@@ -141,6 +141,7 @@ func _setup_doors() -> void:
 	if (connections["top"] != null) or (room_type == GlobalConfig.Room_type.LAST and connections["top"] == null):
 		top_door_x = rng.randi_range(3, tiles_x - 3)
 		var top_door = DOOR.instantiate()
+		top_door.init_to_open()
 		# top_door.position = Vector2(position.x + (top_door_x * tile_size), position.y + tile_size)
 		top_door.position = Vector2(top_door_x * tile_size, tile_size)
 		top_door.entred.connect(_on_body_entered)
@@ -153,9 +154,9 @@ func _setup_doors() -> void:
 	
 	# Setup bottom door if connection exists
 	if (connections["down"] != null) or (room_type == GlobalConfig.Room_type.LAST and connections["down"] == null and connections["top"] != null):
-		print_debug(room_id," ",connections)
 		bottom_door_x = rng.randi_range(3, tiles_x - 3)
 		var bottom_door = DOOR.instantiate()
+		bottom_door.init_to_open()
 		# bottom_door.position = Vector2(position.x + (bottom_door_x * tile_size),position.y+ (tiles_y - 1) * tile_size)
 		bottom_door.position = Vector2((bottom_door_x * tile_size), (tiles_y - 1) * tile_size)
 		bottom_door.entred.connect(_on_body_entered)

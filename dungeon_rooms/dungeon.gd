@@ -1,4 +1,5 @@
 extends Node2D
+class_name  Dungeon
 
 var Room = preload("res://dungeon_rooms/room.tscn")  
 @export var player: Player

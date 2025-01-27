@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cg6jym4e7e55y"]
+[gd_scene load_steps=12 format=3 uid="uid://cg6jym4e7e55y"]
 
 [ext_resource type="Texture2D" uid="uid://cllfp4a18crk2" path="res://used_assests/door/door_spritesheet.png" id="1_u7yhp"]
 [ext_resource type="Script" path="res://dungeon_rooms/room_utils/door/door.gd" id="2_b7lc8"]
@@ -196,6 +196,8 @@ size = Vector2(20, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gts5h"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m058x"]
+
 [node name="Door" type="StaticBody2D"]
 z_index = 2
 texture_filter = 1
@@ -234,4 +236,11 @@ collision_mask = 16
 position = Vector2(-1, 13)
 shape = SubResource("RectangleShape2D_gts5h")
 
+[node name="ExitArea2D" type="Area2D" parent="."]
+
+[node name="ExitCollisionShape2D" type="CollisionShape2D" parent="ExitArea2D"]
+position = Vector2(-1, -25)
+shape = SubResource("RectangleShape2D_m058x")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_body_entered"]
