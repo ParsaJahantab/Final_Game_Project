@@ -19,6 +19,8 @@ var spawend : bool = false
 var room_level = 2
 var room_diff 
 
+var dungeon_bonus : int
+
 func _ready():
 	player = $Player
 	if not player:
@@ -41,14 +43,17 @@ func initialize(p_level):
 		num_nodes = rng.randi_range(4,8)
 		min_size = 10
 		max_size = 20
+		dungeon_bonus = rng.randi_range(50,100)
 	elif p_level >= 2 and  p_level < 4:
 		num_nodes = rng.randi_range(6,10)
 		min_size = 15
 		max_size = 25
+		dungeon_bonus = rng.randi_range(75,125)
 	elif p_level >= 4 :
 		num_nodes = rng.randi_range(8,12)
 		min_size = 20
 		max_size = 30
+		dungeon_bonus = rng.randi_range(100,150)
 	room_level = p_level
 	graph_generator = GraphGenerator.new()
 	randomize()
@@ -110,7 +115,7 @@ func _draw():
 	
 func on_player_exit(id,direction,exit):
 	if exit:
-		GameState.currency_change(GameState.temp_player_currency)
+		GameState.currency_change(GameState.temp_player_currency + dungeon_bonus)
 		GameState.temp_currency_change(GameState.temp_player_currency * -1)
 		SceneManager.goto_scene("res://hub/hub.tscn",room_level)
 	elif current_room.player_been_here and current_room.is_player_in_the_room:
