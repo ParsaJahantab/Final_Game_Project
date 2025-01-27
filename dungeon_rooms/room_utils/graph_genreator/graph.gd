@@ -8,6 +8,7 @@ class CustomGraphNode:
 	var connections: Dictionary
 	
 	func _init(node_id: int):
+		
 		id = node_id
 		connections = {
 			"top": null,
@@ -28,9 +29,9 @@ func _ready() -> void:
 	rng.randomize()
 
 # Create a random graph with specified constraints
-func create_random_graph() -> Array:
-	# Create random number of nodes between 5 and 10
-	var num_nodes = rng.randi_range(5, 10)
+func create_random_graph(num_nodes) -> Array:
+	#var num_nodes = rng.randi_range(5, 10)
+	#var num_nodes = 3
 	var num_nodes_in_main_path 
 	if num_nodes %2 ==0 : 
 		num_nodes_in_main_path = rng.randi_range(num_nodes/2 , num_nodes)
@@ -68,16 +69,16 @@ func create_random_graph() -> Array:
 	filtered_array.remove_at(0)
 	filtered_array.remove_at(filtered_array.size()-1)
 	#print(filtered_array)
-
-	for i in range(num_nodes_in_sub_path):
-		var random_node = filtered_array[randi_range(0, filtered_array.size()-1)]
-		var node := CustomGraphNode.new(num_nodes_in_main_path  + i)
-		available_directions = get_available_directions(random_node , node)
-		if available_directions.size() != 0:
-			random_pair = available_directions[randi() % available_directions.size()]
-			connect_nodes(random_node , node, random_pair[0], random_pair[1])
-			nodes.append(node)
-			filtered_array.append(node)
+	if filtered_array.size() > 0 :
+		for i in range(num_nodes_in_sub_path):
+			var random_node = filtered_array[randi_range(0, filtered_array.size()-1)]
+			var node := CustomGraphNode.new(num_nodes_in_main_path  + i)
+			available_directions = get_available_directions(random_node , node)
+			if available_directions.size() != 0:
+				random_pair = available_directions[randi() % available_directions.size()]
+				connect_nodes(random_node , node, random_pair[0], random_pair[1])
+				nodes.append(node)
+				filtered_array.append(node)
 
 
 	#print_all_connections(nodes)

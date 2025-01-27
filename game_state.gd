@@ -7,7 +7,7 @@ var player_mana_level := 3
 var player_speed_level := 1
 var player_damage_level := 1
 var required_mythril := 50
-var avaialble_levels = 3
+var avaialble_levels = 1
 
 signal currency_changed
 signal temp_currency_changed
