@@ -18,3 +18,12 @@ const ALLOWED_ENEMIES: Dictionary = {
 	
 } 
 
+const BASE_PLAYER_ATTRIBUTES : Dictionary = {
+	
+	"HEALTH" : 100,
+	"MANA" : 100,
+	"DAMAGE" : 50,
+	"SPEED" : 130,
+	
+}
+

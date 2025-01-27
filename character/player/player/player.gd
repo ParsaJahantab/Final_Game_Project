@@ -11,16 +11,16 @@ const ARROW := preload("res://character/player/player_utils/arrow/arrow.tscn")
 @export var knockback_power: float = 500.0
 
 
-var is_dead = false
-var is_hurt = false
+var is_dead : bool = false
+var is_hurt : bool = false
 signal health_changed
 signal mana_changed
 signal attack_pressed
-var weapon := "Axe"
+var weapon :String = "Axe"
 var is_attacking: bool
 var is_rolling : bool
-var base_damage = 100
-var damage = 100
+var base_damage : int
+var damage : int
 var heading 
 var heavy_attack_multiplier :=1.5
 var direction = "Right"
@@ -33,18 +33,28 @@ func _ready() -> void:
 	health_component.initialize(self)
 	mana_component.initialize(self)
 	animation_component.initialize(self)
-	health_component.max_health = 100
-	health_component.current_health = 100
-	mana_component.max_mana = 50
-	mana_component.current_mana = 50
 	_health_changed()
 	_mana_changed()
-	movement_component.speed = 150.0
 	$hitBox/CollisionShape2D.disabled = true
 	for i in range(10):
 		var arrow:Arrow = ARROW.instantiate()
 		arrow.initialize(self)
 		$Arrows.call_deferred("add_child", arrow)
+		
+func initialize():
+	movement_component.speed = GlobalConfig.BASE_PLAYER_ATTRIBUTES["SPEED"]
+	movement_component.change_stat(1.0,(GameState.player_speed_level-1)*3,"player")
+	health_component.max_health = GlobalConfig.BASE_PLAYER_ATTRIBUTES["HEALTH"]
+	health_component.change_stat(1.0,(GameState.player_health_level-1)*10,"player")
+	health_component.current_health = health_component.max_health
+	mana_component.max_mana = GlobalConfig.BASE_PLAYER_ATTRIBUTES["MANA"]
+	mana_component.change_stat(1.0,(GameState.player_mana_level-1)*5,"player")
+	mana_component.current_mana = mana_component.max_mana
+	base_damage = GlobalConfig.BASE_PLAYER_ATTRIBUTES["DAMAGE"]
+	base_damage = base_damage + (GameState.player_mana_level-1)*5
+	damage = base_damage
+	
+	
 	
 func _health_changed():
 	health_changed.emit()
