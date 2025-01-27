@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bedfm0vw6bvae"]
+[gd_scene load_steps=3 format=3 uid="uid://bedfm0vw6bvae"]
 
 [ext_resource type="PackedScene" uid="uid://cg6jym4e7e55y" path="res://dungeon_rooms/room_utils/door/door.tscn" id="1_m30rl"]
 [ext_resource type="Script" path="res://hub/hub.gd" id="1_vjet4"]
-[ext_resource type="PackedScene" uid="uid://dee1u13mp6850" path="res://character/player/player/player.tscn" id="3_exuw7"]
 
 [node name="Hub" type="Node2D"]
 script = ExtResource("1_vjet4")
@@ -23,5 +22,3 @@ position = Vector2(156, 43)
 
 [node name="level5_door" parent="Doors" instance=ExtResource("1_m30rl")]
 position = Vector2(99, 45)
-
-[node name="Player" parent="." instance=ExtResource("3_exuw7")]

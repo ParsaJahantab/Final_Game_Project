@@ -9,6 +9,7 @@ class_name Player
 @onready var hit_box_collision := $hitBox/CollisionShape2D
 const ARROW := preload("res://character/player/player_utils/arrow/arrow.tscn")
 @export var knockback_power: float = 500.0
+@onready var camera = $Camera2D
 
 
 var is_dead : bool = false
@@ -16,7 +17,7 @@ var is_hurt : bool = false
 signal health_changed
 signal mana_changed
 signal attack_pressed
-var weapon :String = "Axe"
+var weapon :String = "Sword"
 var is_attacking: bool
 var is_rolling : bool
 var base_damage : int
@@ -26,6 +27,9 @@ var heavy_attack_multiplier :=1.5
 var direction = "Right"
 func _ready() -> void:
 	await get_tree().process_frame
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	if not is_in_group("persistent"):
+		add_to_group("persistent")
 	health_component.died.connect(_on_died)
 	health_component.health_changed.connect(_health_changed)
 	mana_component.mana_changed.connect(_mana_changed)
@@ -42,6 +46,7 @@ func _ready() -> void:
 		$Arrows.call_deferred("add_child", arrow)
 		
 func initialize():
+	await get_tree().process_frame
 	movement_component.speed = GlobalConfig.BASE_PLAYER_ATTRIBUTES["SPEED"]
 	movement_component.change_stat(1.0,(GameState.player_speed_level-1)*3,"player")
 	health_component.max_health = GlobalConfig.BASE_PLAYER_ATTRIBUTES["HEALTH"]
@@ -94,6 +99,12 @@ func handleInput():
 		else:
 			damage = int(damage * heavy_attack_multiplier)
 			_on_attack_pressed("Heavy")
+	if (Input.is_action_just_pressed("ChangeToSword")):
+		weapon = "Sword"
+	elif(Input.is_action_just_pressed("ChangeToAxe")):
+		weapon = "Axe"
+	elif(Input.is_action_just_pressed("ChangeToBow")):
+		weapon = "Bow"
 		
 func _on_roll_pressed() -> void:
 	if health_component.is_dead:

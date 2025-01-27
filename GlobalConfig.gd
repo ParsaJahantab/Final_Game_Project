@@ -11,6 +11,14 @@ const ENEMY_POWER: Dictionary = {
 	
 }
 
+const LEVEL_TO_DIFF : Dictionary = {
+	1 : Room_diff.EASY,
+	2 : Room_diff.CHALLENGEING,
+	3 : Room_diff.CHALLENGEING,
+	4 : Room_diff.HARDCORE,
+	5 : Room_diff.HARDCORE
+}
+
 const ALLOWED_ENEMIES: Dictionary = {
 	Room_diff.EASY : ["GOBLIN"],
 	Room_diff.CHALLENGEING : ["GOBLIN" , "HOBGOBLINS"],
