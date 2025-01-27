@@ -65,6 +65,7 @@ func play_attack(weapon : String,attack_type:String) -> void:
 		animation_player.play(weapon+attack_type+ "Attack")
 		await animation_player.animation_finished
 		is_attacking = false
+		player.hit_box_collision.scale = Vector2(1,1)
 		
 func play_bow_attack():
 	if not is_attacking :

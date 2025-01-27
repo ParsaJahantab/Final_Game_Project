@@ -134,7 +134,6 @@ func init(p_room_id: int, p_connected_rooms: Dictionary, p_player: Node2D, p_dif
 		enemies_killed = false
 	
 func _ready() -> void:
-	# Add collision areas node
 	add_child(collision_areas)
 	collision_areas.name = "CollisionAreas"
 
@@ -153,7 +152,8 @@ func _setup_doors() -> void:
 		collision_areas.add_child(top_area)
 	
 	# Setup bottom door if connection exists
-	if connections["down"] != null or (room_type == GlobalConfig.Room_type.LAST and connections["down"] == null and connections["top"] != null):
+	if (connections["down"] != null) or (room_type == GlobalConfig.Room_type.LAST and connections["down"] == null and connections["top"] != null):
+		print_debug(room_id," ",connections)
 		bottom_door_x = rng.randi_range(3, tiles_x - 3)
 		var bottom_door = DOOR.instantiate()
 		# bottom_door.position = Vector2(position.x + (bottom_door_x * tile_size),position.y+ (tiles_y - 1) * tile_size)

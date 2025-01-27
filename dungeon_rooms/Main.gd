@@ -1,7 +1,7 @@
 extends Node2D
 
 var Room = preload("res://dungeon_rooms/room.tscn")  
-@export var player: Node2D
+@export var player: Player
 var tile_size = 16
 var num_rooms = 5
 var min_size = 15
@@ -16,11 +16,14 @@ var zoom = 1
 var camera: Camera2D
 
 func _ready():
+	if not player:
+		await get_tree().process_frame
+	player.initialize()
 	camera = player.get_node("Camera2D")
 	if not camera:
 		await get_tree().process_frame
-		camera = player.get_node("Camera2D")
-		zoom = camera.Zoom.x
+	camera = player.get_node("Camera2D")
+	zoom = camera.zoom.x
 	y_sort_enabled = true
 	graph_generator = GraphGenerator.new()
 	randomize()
