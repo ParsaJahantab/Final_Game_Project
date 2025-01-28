@@ -100,6 +100,7 @@ var is_in_conflict: bool
 var is_player_in_the_room : bool
 var enemies_killed := false
 var exit_dungeon_door : String
+var num_of_hubgoblins : int
 
 var player: Node2D
 var rng := RandomNumberGenerator.new()
@@ -279,6 +280,10 @@ func spawn_enemies() -> void:
 	while room_enemy_power > 1:
 		var allowed_enemies: Array = GlobalConfig.ALLOWED_ENEMIES[room_diff]
 		var random_enemy: String = allowed_enemies.pick_random()
+		if random_enemy == "HOBGOBLIN" and num_of_hubgoblins > 3:
+			random_enemy = "GOBLIN"
+		elif random_enemy == "HOBGOBLIN" and num_of_hubgoblins <= 3:
+			num_of_hubgoblins +=1
 		room_enemy_power -= GlobalConfig.ENEMY_POWER[random_enemy]
 		num_of_enemies += 1
 		

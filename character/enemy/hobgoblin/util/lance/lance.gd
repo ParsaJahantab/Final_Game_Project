@@ -5,7 +5,7 @@ var Entity: BaseEnemy
 var damage: int
 var direction: Vector2
 var is_moving := false
-var speed := 200.0
+var speed := 100.0
 signal on_hit
 
 

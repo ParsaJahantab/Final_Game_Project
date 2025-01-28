@@ -26,12 +26,35 @@ const ALLOWED_ENEMIES: Dictionary = {
 	
 } 
 
+
+const GOBLIN_ATTRIBUTES : Dictionary = {
+	"max_health" : 60,
+	"speed" : 80.0,
+	"damage" : 15,
+	"knockback_power" : 700,
+	"currency" : 30
+}
+const ORC_ATTRIBUTES : Dictionary = {
+	"max_health" : 240,
+	"speed" : 40.0,
+	"damage" : 30,
+	"knockback_power" : 700,
+	"currency" : 90
+}
+const HOBGOBLIN_ATTRIBUTES : Dictionary = {
+	"max_health" : 80,
+	"speed" : 30.0,
+	"damage" : 10,
+	"knockback_power" : 700,
+	"currency" : 60
+}
+
 const BASE_PLAYER_ATTRIBUTES : Dictionary = {
 	
-	"HEALTH" : 100,
+	"HEALTH" : 200,
 	"MANA" : 100,
-	"DAMAGE" : 50,
-	"SPEED" : 130,
+	"DAMAGE" : 80,
+	"SPEED" : 150,
 	
 }
 
