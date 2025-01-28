@@ -7,24 +7,30 @@ class_name Player
 @onready var animation_component = $PlayerAnimationComponent
 @onready var sprite := $Knight
 @onready var hit_box_collision := $hitBox/CollisionShape2D
+@onready var camera = $Camera2D
+@onready var timer = $Timer
 const ARROW := preload("res://character/player/player_utils/arrow/arrow.tscn")
 @export var knockback_power: float = 500.0
-@onready var camera = $Camera2D
 
-
-var is_dead : bool = false
-var is_hurt : bool = false
 signal health_changed
 signal mana_changed
 signal attack_pressed
-var weapon :String = "Sword"
-var is_attacking: bool
+signal died
+
+var is_dead : bool = false
+var is_hurt : bool = false
 var is_rolling : bool
+var is_attacking: bool
+var can_shoot : bool = true
+var is_input_enable : bool = true
+var weapon :String = "Sword"
 var base_damage : int
 var damage : int
 var heading 
 var heavy_attack_multiplier :=1.5
 var direction = "Right"
+var mouse_pos = get_global_mouse_position()
+
 func _ready() -> void:
 	await get_tree().process_frame
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -40,10 +46,8 @@ func _ready() -> void:
 	_health_changed()
 	_mana_changed()
 	$hitBox/CollisionShape2D.disabled = true
-	for i in range(10):
-		var arrow:Arrow = ARROW.instantiate()
-		arrow.initialize(self)
-		$Arrows.call_deferred("add_child", arrow)
+	$Marker2D.visible = false
+
 		
 func initialize():
 	await get_tree().process_frame
@@ -56,7 +60,7 @@ func initialize():
 	mana_component.change_stat(1.0,(GameState.player_mana_level-1)*5,"player")
 	mana_component.current_mana = mana_component.max_mana
 	base_damage = GlobalConfig.BASE_PLAYER_ATTRIBUTES["DAMAGE"]
-	base_damage = base_damage + (GameState.player_mana_level-1)*5
+	base_damage = base_damage + (GameState.player_damage_level-1)*5
 	damage = base_damage
 	
 	
@@ -67,12 +71,19 @@ func _health_changed():
 func _mana_changed():
 	mana_changed.emit()
 
+func set_input_enable(is_enable : bool):
+	is_input_enable = is_enable
+
 func _physics_process(_delta: float) -> void:
 	
 	if is_dead:
 		return
-	
-	handleInput()
+	mouse_pos = get_global_mouse_position()
+	if is_input_enable:
+		handleInput()
+	if weapon == "Bow":
+		$Marker2D/MarkerSprite.global_position = mouse_pos
+		$Marker2D.look_at(mouse_pos)
 	
 func handleInput():
 	if not Input.is_anything_pressed() and not is_attacking and not is_rolling and not is_hurt:
@@ -100,10 +111,13 @@ func handleInput():
 			damage = int(damage * heavy_attack_multiplier)
 			_on_attack_pressed("Heavy")
 	if (Input.is_action_just_pressed("ChangeToSword")):
+		$Marker2D.visible = false
 		weapon = "Sword"
 	elif(Input.is_action_just_pressed("ChangeToAxe")):
+		$Marker2D.visible = false
 		weapon = "Axe"
 	elif(Input.is_action_just_pressed("ChangeToBow")):
+		$Marker2D.visible = true
 		weapon = "Bow"
 		
 func _on_roll_pressed() -> void:
@@ -123,10 +137,19 @@ func _on_attack_pressed(attack_type:String) -> void:
 		is_attacking = true
 		if weapon !="Bow":
 			animation_component.play_attack(weapon,attack_type)
+			await animation_component.animation_player.animation_finished
 		else :
-			animation_component.play_bow_attack()
-			$Arrows.get_children()[0].shot(damage)
-		await animation_component.animation_player.animation_finished
+			if can_shoot:
+				can_shoot = false
+				timer.start()
+				animation_component.play_bow_attack()
+				var arrow : Arrow = ARROW.instantiate()
+				arrow.global_position = global_position
+				arrow.global_position.y = arrow.global_position.y + 11
+				arrow.global_rotation = $Marker2D.global_rotation
+				get_parent().add_child(arrow)
+				arrow.shot(damage)
+				await animation_component.animation_player.animation_finished
 		is_attacking = false
 		damage = base_damage
 
@@ -152,4 +175,10 @@ func knockback(enemy_pos: Vector2, damage_received: int) -> void:
 
 func _on_died() -> void:
 	is_dead = true
-	pass
+	died.emit()
+
+
+func _on_timer_timeout():
+	if not can_shoot:
+		can_shoot = true
+	

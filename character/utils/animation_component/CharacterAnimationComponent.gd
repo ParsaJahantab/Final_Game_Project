@@ -15,3 +15,4 @@ func update_direction(velocity: Vector2) -> void:
 		current_direction = "Left"
 	elif velocity.x > 0:
 		current_direction = "Right"
+

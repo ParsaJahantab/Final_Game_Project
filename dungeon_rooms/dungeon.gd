@@ -16,6 +16,7 @@ var zoom = 1
 var camera: Camera2D
 var spawend : bool = false
 
+
 var room_level = 2
 var room_diff 
 
@@ -27,6 +28,7 @@ func _ready():
 		await get_tree().process_frame
 		player = $Player
 	player.initialize()
+	player.died.connect(on_player_death)
 	camera = player.get_node("Camera2D")
 	if not camera:
 		await get_tree().process_frame
@@ -117,6 +119,8 @@ func on_player_exit(id,direction,exit):
 	if exit:
 		GameState.currency_change(GameState.temp_player_currency + dungeon_bonus)
 		GameState.temp_currency_change(GameState.temp_player_currency * -1)
+		if room_level == GameState.avaialble_levels:
+			GameState.avaialble_levels += 1
 		SceneManager.goto_scene("res://hub/hub.tscn",room_level)
 	elif current_room.player_been_here and current_room.is_player_in_the_room:
 		var opposites = {
@@ -176,11 +180,9 @@ func change_room(index:int,direction):
 	camera.limit_top = current_room.position.y + tile_size/2
 	camera.limit_right = current_room.position.x + ((current_room.tiles_x) * tile_size)
 	camera.limit_bottom = current_room.position.y + ((current_room.tiles_y) * tile_size)
-#
-#
-#func _input(event):
-	#if event.is_action_pressed('ui_select'):
-		#for n in $Rooms.get_children():
-			#n.queue_free()
-		#make_rooms()
-		#_draw()
+
+func on_player_death():
+	player.initialize()
+	player.is_dead = false
+	GameState.temp_currency_change(GameState.temp_player_currency * -1)
+	SceneManager.goto_scene("res://hub/hub.tscn",room_level)

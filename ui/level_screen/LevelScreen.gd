@@ -13,13 +13,14 @@ var attributes := {
 var required_mythril: int  
 var required_mythrils: Array[int] = []
 
-@onready var mythril_var: Label = $mythrilVar
-@onready var required_var: Label = $RequiredVar
+@onready var mythril_var: Label = $CanvasLayer/mythrilVar
+@onready var required_var: Label = $CanvasLayer/RequiredVar
+
+signal closed
 
 func _ready() -> void:
-	# Initialize attributes
 	for attr_name in attributes:
-		var node: Control = get_node(attr_name.capitalize())
+		var node: Control = $CanvasLayer.get_node(attr_name.capitalize())
 		attributes[attr_name] = node
 		node.initialize_attribute(attr_name)
 		# Connect signals
@@ -54,4 +55,5 @@ func _on_texture_button_pressed() -> void:
 			for attr_name in attributes:
 				var property_name = "player_%s_level" % attr_name
 				GameState.set(property_name, attributes[attr_name].level)
+	closed.emit()
 	queue_free() 

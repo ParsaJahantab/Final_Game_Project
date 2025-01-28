@@ -16,15 +16,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xmihh")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 offset_right = 102.0
 offset_bottom = 107.0
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("1_iu5kb")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
 offset_left = 15.0
 offset_top = 14.0
 offset_right = 115.0
@@ -32,37 +32,32 @@ offset_bottom = 122.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_irhne")
 
-[node name="Mana" parent="." instance=ExtResource("3_ovmvv")]
-layout_mode = 1
+[node name="Mana" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
 offset_top = 38.0
 offset_right = -277.0
 offset_bottom = -178.0
 
-[node name="Health" parent="." instance=ExtResource("3_ovmvv")]
-layout_mode = 1
+[node name="Health" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
 offset_top = 18.0
 offset_right = -277.0
 offset_bottom = -198.0
 
-[node name="Damage" parent="." instance=ExtResource("3_ovmvv")]
-layout_mode = 1
+[node name="Damage" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
 offset_top = 58.0
 offset_right = -277.0
 offset_bottom = -158.0
 
-[node name="Speed" parent="." instance=ExtResource("3_ovmvv")]
-layout_mode = 1
+[node name="Speed" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
 offset_top = 78.0
 offset_right = -277.0
 offset_bottom = -138.0
 
-[node name="Required" type="Label" parent="."]
+[node name="Required" type="Label" parent="CanvasLayer"]
 texture_filter = 1
-layout_mode = 0
 offset_left = 19.0
 offset_top = 109.0
 offset_right = 98.0
@@ -71,9 +66,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 9
 text = "Required mythril: "
 
-[node name="RequiredVar" type="Label" parent="."]
+[node name="RequiredVar" type="Label" parent="CanvasLayer"]
 texture_filter = 1
-layout_mode = 0
 offset_left = 102.0
 offset_top = 109.0
 offset_right = 181.0
@@ -81,9 +75,8 @@ offset_bottom = 132.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 9
 
-[node name="mythril" type="Label" parent="."]
+[node name="mythril" type="Label" parent="CanvasLayer"]
 texture_filter = 1
-layout_mode = 0
 offset_left = 20.0
 offset_top = 129.0
 offset_right = 99.0
@@ -92,9 +85,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 9
 text = "mythril :"
 
-[node name="mythrilVar" type="Label" parent="."]
+[node name="mythrilVar" type="Label" parent="CanvasLayer"]
 texture_filter = 1
-layout_mode = 0
 offset_left = 102.0
 offset_top = 129.0
 offset_right = 181.0
@@ -102,12 +94,11 @@ offset_bottom = 152.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 9
 
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 81.0
 offset_top = 153.0
 offset_right = 97.0
 offset_bottom = 173.0
 texture_normal = ExtResource("5_nai1g")
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_texture_button_pressed"]

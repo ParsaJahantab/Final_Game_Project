@@ -34,6 +34,12 @@ func set_dircetion():
 		else:
 			player.sprite.flip_h = false
 
+func set_direction_mouse():
+	if player:
+		if player.mouse_pos.x < player.position.x:
+			player.sprite.flip_h = true
+		else:
+			player.sprite.flip_h = false
 func play_run():
 	if not is_attacking:
 		set_dircetion()
@@ -53,7 +59,7 @@ func play_attack(weapon : String,attack_type:String) -> void:
 	if not is_attacking :
 		animation_player.stop()
 		is_attacking = true
-		set_dircetion()
+		set_direction_mouse()
 		if current_direction == "Right":
 			player.hit_box_collision.position = Vector2i(26,20)
 		else:
@@ -71,7 +77,7 @@ func play_bow_attack():
 	if not is_attacking :
 		animation_player.stop()
 		is_attacking = true
-		set_dircetion()
+		set_direction_mouse()
 		animation_player.play("BowAttack")
 		await animation_player.animation_finished
 		is_attacking = false

@@ -7,7 +7,7 @@ enum Room_diff {EASY ,CHALLENGEING, HARDCORE}
 const ENEMY_POWER: Dictionary = {
 	"ORC" : 6,
 	"GOBLIN" : 6,
-	"HOBGOBLINS" : 4
+	"HOBGOBLIN" : 4
 	
 }
 
@@ -21,8 +21,8 @@ const LEVEL_TO_DIFF : Dictionary = {
 
 const ALLOWED_ENEMIES: Dictionary = {
 	Room_diff.EASY : ["GOBLIN"],
-	Room_diff.CHALLENGEING : ["GOBLIN" , "HOBGOBLINS"],
-	Room_diff.HARDCORE : ["GOBLIN" , "HOBGOBLINS" , "ORC"]
+	Room_diff.CHALLENGEING : ["GOBLIN" , "HOBGOBLIN"],
+	Room_diff.HARDCORE : ["GOBLIN" , "HOBGOBLIN" , "ORC"]
 	
 } 
 
