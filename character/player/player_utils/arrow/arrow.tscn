@@ -6,12 +6,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6782"]
 
 [node name="Arrow" type="Node2D"]
+z_index = 2
 texture_filter = 1
 script = ExtResource("1_0wniy")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 10
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_j6782")
@@ -19,4 +20,10 @@ shape = SubResource("CircleShape2D_j6782")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_d5i1e")
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.15, 0.45)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

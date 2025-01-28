@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dee1u13mp6850"]
+[gd_scene load_steps=23 format=3 uid="uid://dee1u13mp6850"]
 
 [ext_resource type="Script" path="res://character/player/player/player.gd" id="1_2cj5x"]
 [ext_resource type="PackedScene" uid="uid://cvvy735hirreb" path="res://character/utils/health_component/character_health_component.tscn" id="1_gsbau"]
 [ext_resource type="PackedScene" uid="uid://da6xrlefp6it5" path="res://character/utils/movement_component/character_movement_component.tscn" id="2_17pqn"]
 [ext_resource type="PackedScene" uid="uid://ioofqe3pvypu" path="res://character/player/player_utils/animation_component/PlayerAnimationComponent.tscn" id="5_v424h"]
+[ext_resource type="Texture2D" uid="uid://d24v8vfkd04wu" path="res://used_assests/marker/crosshair_1.png" id="7_b3us0"]
 [ext_resource type="PackedScene" uid="uid://djbcfaikbhp4j" path="res://character/player/player_utils/mana_component/player_mana_component.tscn" id="11_be6tu"]
 [ext_resource type="Texture2D" uid="uid://uw62sei3k1gk" path="res://used_assests/knight/used/knight.png" id="12_3qolv"]
 
@@ -479,7 +480,7 @@ libraries = {
 }
 
 [node name="hurtBox" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
@@ -501,7 +502,6 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, 8)
-position_smoothing_enabled = true
 
 [node name="PlayerManaComponent" parent="." instance=ExtResource("11_be6tu")]
 
@@ -511,6 +511,15 @@ texture = ExtResource("12_3qolv")
 hframes = 12
 vframes = 11
 
-[node name="Arrows" type="Node2D" parent="."]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Marker2D" type="Marker2D" parent="."]
+texture_filter = 1
+gizmo_extents = 20.0
+
+[node name="MarkerSprite" type="Sprite2D" parent="Marker2D"]
+texture = ExtResource("7_b3us0")
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

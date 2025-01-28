@@ -40,13 +40,15 @@ func _ready():
 		if not HUD.get_parent():
 			add_child(HUD)
 			
-		player.camera.limit_left = -10000000
-		player.camera.limit_top = -10000000
-		player.camera.limit_right = 10000000
-		player.camera.limit_bottom = 10000000
 
 		player.position = Vector2(0, 0)
-
+	
+	
+	player.camera.limit_left = -28 * 16
+	player.camera.limit_top = -14 * 16
+	player.camera.limit_right = 28 * 16
+	player.camera.limit_bottom = 14 * 16
+	$RingKeeper.player = player
 	player.initialize()
 
 

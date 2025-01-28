@@ -37,7 +37,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [node name="RingKeeper" instance=ExtResource("1_e36d0")]
@@ -49,3 +49,7 @@ script = ExtResource("2_wjtrk")
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_wude4")
 animation = &"idle"
+frame_progress = 0.690155
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-var player_currency := 1000
+var player_currency := 3000
 var temp_player_currency :=0
 var player_health_level := 1
 var player_mana_level := 3

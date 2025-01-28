@@ -8,7 +8,9 @@ const HEALTH_POTION := preload("res://dungeon_rooms/room_utils/potions/health_po
 const MANA_POTION := preload("res://dungeon_rooms/room_utils/potions/mana_potion.tscn")
 const BLOCKING_SPIKE := preload("res://dungeon_rooms/room_utils/spike/blocking_spike.tscn")
 const ENEMY_SCENES := {
-	&"GOBLIN": preload("res://character/enemy/goblin/goblin.tscn")
+	&"GOBLIN": preload("res://character/enemy/goblin/goblin.tscn"),
+	&"ORC": preload("res://character/enemy/orc/orc.tscn"),
+	&"HOBGOBLIN": preload("res://character/enemy/hobgoblin/hob_goblin.tscn")
 }
 
 const ROOM_POWER_MULTIPLIER := {
