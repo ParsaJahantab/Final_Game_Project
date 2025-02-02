@@ -5,7 +5,7 @@ class_name Player
 @onready var health_component: CharacterHealthComponent= $CharacterHealthComponent
 @onready var mana_component: PlayerManaComponent = $PlayerManaComponent
 @onready var animation_component = $PlayerAnimationComponent
-@onready var sprite := $Knight
+@onready var sprite : Sprite2D = $Knight
 @onready var hit_box_collision := $hitBox/CollisionShape2D
 @onready var camera = $Camera2D
 @onready var timer = $Timer
@@ -33,7 +33,7 @@ var mouse_pos = get_global_mouse_position()
 
 func _ready() -> void:
 	await get_tree().process_frame
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	#process_mode = Node.PROCESS_MODE_ALWAYS
 	if not is_in_group("persistent"):
 		add_to_group("persistent")
 	health_component.died.connect(_on_died)
@@ -62,6 +62,10 @@ func initialize():
 	base_damage = GlobalConfig.BASE_PLAYER_ATTRIBUTES["DAMAGE"]
 	base_damage = base_damage + (GameState.player_damage_level-1)*5
 	damage = base_damage
+	health_component.is_dead = false
+	is_dead = false
+	is_hurt = false
+	is_attacking = false
 	
 	
 	

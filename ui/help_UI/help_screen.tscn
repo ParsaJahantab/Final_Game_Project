@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://dt1e6che2fibn"]
+
+[ext_resource type="Script" path="res://ui/help_UI/help_screen.gd" id="1_t6qe0"]
+[ext_resource type="Texture2D" uid="uid://b5vptl2ox8o66" path="res://used_assests/DialogueBoxSimple.png" id="2_ivwql"]
+[ext_resource type="Texture2D" uid="uid://8lg1f2as70dk" path="res://used_assests/gui/level_screen/arrowBeige_right.png" id="3_ux0td"]
+[ext_resource type="Texture2D" uid="uid://bfrkq06in85us" path="res://used_assests/gui/level_screen/arrowBeige_right_pressed.png" id="4_sglna"]
+[ext_resource type="Texture2D" uid="uid://b6r801gawq18o" path="res://used_assests/gui/level_screen/arrowBeige_left.png" id="5_mcc1m"]
+[ext_resource type="Texture2D" uid="uid://bgaf53m28a34s" path="res://used_assests/gui/level_screen/arrowBeige_left_pressed.png" id="6_ws264"]
+[ext_resource type="Texture2D" uid="uid://cgtxwje2r1fi3" path="res://used_assests/gui/level_screen/iconCheck_bronze.png" id="7_x5uav"]
+
+[node name="HelpScreen" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t6qe0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InnerPanel" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -78.0
+offset_right = 90.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_ivwql")
+
+[node name="NextButton" type="TextureButton" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = -56.0
+offset_right = 94.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_ux0td")
+texture_pressed = ExtResource("4_sglna")
+
+[node name="PreviousButton" type="TextureButton" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -56.0
+offset_right = -178.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("5_mcc1m")
+texture_pressed = ExtResource("6_ws264")
+
+[node name="DoneButton" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = -32.0
+offset_right = -35.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("7_x5uav")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -168.0
+offset_top = -56.0
+offset_right = 64.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/DoneButton" to="." method="_on_done_button_pressed"]

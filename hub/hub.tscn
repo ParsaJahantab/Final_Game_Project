@@ -542,6 +542,7 @@ sources/0 = SubResource("TileSetAtlasSource_b8b56")
 sources/1 = SubResource("TileSetAtlasSource_jncoc")
 
 [node name="Hub" type="Node2D"]
+process_mode = 1
 texture_filter = 1
 script = ExtResource("1_vjet4")
 

@@ -2,6 +2,7 @@ extends Node2D
 class_name Dungeon
 
 var Room = preload("res://dungeon_rooms/room.tscn")  
+var Hint = preload("res://ui/help_UI/help_screen.tscn") 
 var player: Player
 var tile_size = 16
 var min_size : int = 15
@@ -36,6 +37,7 @@ func _ready():
 	zoom = camera.zoom.x
 	y_sort_enabled = true
 	move_child($Player, get_child_count() - 1)
+	
 	
 func initialize(p_level):
 	var num_nodes : int
@@ -144,7 +146,31 @@ func change_room(index:int,direction):
 			current_room.position.x + ((current_room.tiles_x/2) * tile_size),
 			current_room.position.y + ((current_room.tiles_y/2) * tile_size)
 		)
+		if "first_dungeon" not in GameState.shown_hints:
+			var hint = Hint.instantiate()
+			var hints : Array[String] = ["Each dungeon has a number of rooms","Beat the ones in the main path","To beat the dungeon","each dungeon yields an amount of currency"]
+			hint.initialize(hints)
+			add_child(hint)
+			GameState.shown_hints.append("first_dungeon")
 	else : 
+		if room_level == 1 and "goblin" not in GameState.shown_hints:
+			var hint = Hint.instantiate()
+			var hints : Array[String] = ["Goblins are fast" , "They are meele enemies and swarm you" , "Yet, they have low damage and health" , "Each enemy yields an amount of currency"]
+			hint.initialize(hints)
+			add_child(hint)
+			GameState.shown_hints.append("goblin")
+		if room_level >= 2 and "hobgoblin" not in GameState.shown_hints:
+			var hint = Hint.instantiate()
+			var hints : Array[String] = ["Watch out hobgoblins are here too" , "They are ranged enemies that throw spears at you" , "Once you get close to them,they'll run away" , "Also remember enemies get stronger in each level "]
+			hint.initialize(hints)
+			add_child(hint)
+			GameState.shown_hints.append("hobgoblin")
+		if room_level >= 4 and "orc" not in GameState.shown_hints:
+			var hint = Hint.instantiate()
+			var hints : Array[String] = ["Watch out orc are here too" , "They are meele enemies" , "With they have high damage and health"]
+			hint.initialize(hints)
+			add_child(hint)
+			GameState.shown_hints.append("orc")
 		if direction == "left": 
 			new_player_pos = Vector2(
 				current_room.position.x + (-2 * tile_size),
@@ -169,15 +195,16 @@ func change_room(index:int,direction):
 	player.position = new_player_pos
 	var tilemap = current_room.get_node("DungeonTileMap")
 	var map_rect = tilemap.get_used_rect()
+	
 	#var tile_size = tilemap.tile_set.tile_size
-	#
+	
 	## Calculate pixel coordinates
 	var limits_min = map_rect.position * tile_size
 	var limits_max = (map_rect.position + map_rect.size) * tile_size
 	#
 	## Set camera limits
 	camera.limit_left = current_room.position.x
-	camera.limit_top = current_room.position.y + tile_size/2
+	camera.limit_top = current_room.position.y + +tile_size/2
 	camera.limit_right = current_room.position.x + ((current_room.tiles_x) * tile_size)
 	camera.limit_bottom = current_room.position.y + ((current_room.tiles_y) * tile_size)
 
