@@ -24,7 +24,6 @@ func _ready():
 	if not ResourceManager:
 		push_error("ResourceManager is null!")
 		
-	print(GlobalConfig)
 	
 	
 func currency_change(amount_of_change : int):

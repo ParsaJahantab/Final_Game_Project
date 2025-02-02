@@ -2,7 +2,6 @@ extends Control
 
 
 func _ready():
-	print(GameState.has_save_file())
 	if GameState.has_save_file():
 		$CanvasLayer/ContinueGameButton.show()
 		$CanvasLayer/ContinueGameButton.disabled = false 

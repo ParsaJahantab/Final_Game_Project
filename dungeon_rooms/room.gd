@@ -250,7 +250,6 @@ func _create_collision_area(direction: String) -> Area2D:
 	
 	area.body_entered.connect(
 		func(_body): 
-			#print("Detected collision from: ", direction)  # Debug print
 			direction_detected.emit(room_id,direction,exiting)
 	)
 	
@@ -259,8 +258,7 @@ func _create_collision_area(direction: String) -> Area2D:
 	
 
 func _on__player_body_entered():
-	# Check if the body is the player
-		print("Player entered the collision area")
+	pass
 
 
 func _calculate_room_size(area: int) -> GlobalConfig.Room_size:
