@@ -521,6 +521,7 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/ExitGameButton"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 72.0
 offset_top = 16.0
 offset_right = 112.0
@@ -540,6 +541,7 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/NewGameButton"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 48.0
 offset_top = 16.0
 offset_right = 133.0
@@ -559,6 +561,7 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/ContinueGameButton"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 32.0
 offset_top = 16.0
 offset_right = 152.0

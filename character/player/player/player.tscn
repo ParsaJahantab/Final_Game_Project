@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dee1u13mp6850"]
+[gd_scene load_steps=24 format=3 uid="uid://dee1u13mp6850"]
 
 [ext_resource type="Script" path="res://character/player/player/player.gd" id="1_2cj5x"]
 [ext_resource type="PackedScene" uid="uid://cvvy735hirreb" path="res://character/utils/health_component/character_health_component.tscn" id="1_gsbau"]
 [ext_resource type="PackedScene" uid="uid://da6xrlefp6it5" path="res://character/utils/movement_component/character_movement_component.tscn" id="2_17pqn"]
 [ext_resource type="PackedScene" uid="uid://ioofqe3pvypu" path="res://character/player/player_utils/animation_component/PlayerAnimationComponent.tscn" id="5_v424h"]
 [ext_resource type="Texture2D" uid="uid://d24v8vfkd04wu" path="res://used_assests/marker/crosshair_1.png" id="7_b3us0"]
+[ext_resource type="AudioStream" uid="uid://c2k1r441vrlda" path="res://music_and_sfx/running.mp3" id="8_aatky"]
 [ext_resource type="PackedScene" uid="uid://djbcfaikbhp4j" path="res://character/player/player_utils/mana_component/player_mana_component.tscn" id="11_be6tu"]
 [ext_resource type="Texture2D" uid="uid://uw62sei3k1gk" path="res://used_assests/knight/used/knight.png" id="12_3qolv"]
 
@@ -467,6 +468,9 @@ texture_filter = 1
 collision_layer = 49
 collision_mask = 49
 script = ExtResource("1_2cj5x")
+
+[node name="AudioRunnig" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_aatky")
 
 [node name="CharacterHealthComponent" parent="." instance=ExtResource("1_gsbau")]
 
