@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b81ksf7qy3fcq"]
+[gd_scene load_steps=3 format=3 uid="uid://b81ksf7qy3fcq"]
 
 [ext_resource type="Texture2D" uid="uid://b7oud33m13brs" path="res://used_assests/gui/menu.png" id="1_hlr6k"]
+[ext_resource type="Script" path="res://ui/hud/menu_button/MenuBotton.gd" id="1_wu87m"]
 
 [node name="MenuBotton" type="Control"]
 texture_filter = 1
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wu87m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -23,3 +25,5 @@ offset_right = 1.0
 offset_bottom = 25.0
 grow_horizontal = 0
 texture_normal = ExtResource("1_hlr6k")
+
+[connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_texture_button_pressed"]

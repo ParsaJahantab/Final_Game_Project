@@ -14,6 +14,9 @@ var current_state: LoadState = LoadState.READY
 
 signal scene_changed(new_scene_name)
 func _ready():
+	pass
+
+func load_hub():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
@@ -36,7 +39,7 @@ func register_persistent_node(node: Node, node_id: String = ""):
 		#node.get_parent().remove_child(node)
 	
 	persistent_nodes[node_id] = node
-	node.process_mode = Node.PROCESS_MODE_ALWAYS
+	#node.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 func unregister_persistent_node(node_id: String):
 	if persistent_nodes.has(node_id):
@@ -79,6 +82,7 @@ func _deferred_goto_scene(path,params):
 	
 	current_state = LoadState.READY
 	emit_signal("scene_changed", current_scene.name)
+	GameState.save_game()
 
 func _attach_persistent_nodes():
 	for node_id in persistent_nodes:

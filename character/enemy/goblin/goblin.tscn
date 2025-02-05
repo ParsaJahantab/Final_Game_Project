@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://c86gbx4q2lur2"]
+[gd_scene load_steps=21 format=3 uid="uid://c86gbx4q2lur2"]
 
 [ext_resource type="PackedScene" uid="uid://dbt5m2uyw613v" path="res://character/enemy/enemy_base/enemy_base.tscn" id="1_lk3rs"]
 [ext_resource type="Script" path="res://character/enemy/goblin/goblin.gd" id="2_ec4tx"]
 [ext_resource type="Texture2D" uid="uid://8xgb5mvrn4eq" path="res://used_assests/goblin/spritesheet (2).png" id="3_ogdwd"]
 [ext_resource type="Texture2D" uid="uid://d2bu61s3xmv31" path="res://used_assests/goblin/goblin_attack_spritesheet.png" id="4_15t8h"]
+[ext_resource type="AudioStream" uid="uid://dlddujex8gyya" path="res://music_and_sfx/goblin_attacking.mp3" id="5_36b0e"]
 
 [sub_resource type="Animation" id="Animation_2eccd"]
 length = 0.001
@@ -1033,5 +1034,8 @@ frame = 1
 
 [node name="OverHaeadHealthBar" parent="." index="11"]
 position = Vector2(0, 6)
+
+[node name="AttackSoundEffect" parent="." index="12"]
+stream = ExtResource("5_36b0e")
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

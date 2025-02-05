@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://dungeon_rooms/dungeon.gd" id="1_8jonh"]
 
 [node name="Dungeon" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_8jonh")
 
 [node name="Rooms" type="Node" parent="."]

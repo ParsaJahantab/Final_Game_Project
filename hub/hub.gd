@@ -4,6 +4,8 @@ class_name Hub
 
 var player: Player
 var HUD 
+var Hint = preload("res://ui/help_UI/help_screen.tscn")  
+@onready var hub_ost = $Theme
 
 static var player_added = false
 
@@ -20,6 +22,7 @@ func _ready():
 		i += 1
 
 	if not player_added:
+		SceneManager.load_hub()
 		player = preload("res://character/player/player/player.tscn").instantiate()
 		add_child(player)
 		HUD = preload("res://ui/hud/hud.tscn").instantiate()
@@ -50,6 +53,29 @@ func _ready():
 	player.camera.limit_bottom = 14 * 16
 	$RingKeeper.player = player
 	player.initialize()
+	player.sprite.frame = 60
+	if "movement" not in GameState.shown_hints:
+		var hint = Hint.instantiate()
+		var hints : Array[String] = ["Press 'W' to move up","Press 'S' to move down","Press 'D' to move right","Press 'A' to move left" , "Press space to roll"]
+		hint.initialize(hints)
+		add_child(hint)
+		GameState.shown_hints.append("movement")
+		await hint.done
+	if "attack" not in GameState.shown_hints:
+		var hint = Hint.instantiate()
+		var hints : Array[String] = ["Press 'LMB' for light attack","Press 'RMB' for heavy attack","Heavy attack deals more damage" , "It also has more range" , "However, it is slower"]
+		hint.initialize(hints)
+		add_child(hint)
+		GameState.shown_hints.append("attack")
+		await hint.done
+	if "upgrade" not in GameState.shown_hints:
+		var hint = Hint.instantiate()
+		var hints : Array[String] = ["Press 'E' to interact with the upgrade  \n when near the ringkeeper" , "Each upgrade require currency" , "The amount of currency gets higher \n with each upgrade"]
+		hint.initialize(hints)
+		add_child(hint)
+		GameState.shown_hints.append("upgrade") 
+		hub_ost.loop = true
+		hub_ost.play()
 
 
 		
@@ -60,4 +86,5 @@ func _process(delta):
 	pass
 	
 func on_exit(level : int) -> void:
+	hub_ost.stop()
 	SceneManager.goto_scene("res://dungeon_rooms/dungeon.tscn",level)

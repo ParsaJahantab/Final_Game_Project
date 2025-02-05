@@ -8,7 +8,6 @@ func _ready():
 	await get_tree().process_frame
 	await get_tree().process_frame
 	player = get_parent().player
-	print(get_parent())
 	player.health_changed.connect(update)
 	$CanvasLayer/HealthBar.max_value= player.health_component.max_health
 	update()

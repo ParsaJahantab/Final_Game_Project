@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="Rougelike"
-run/main_scene="res://hub/hub.tscn"
+run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
+ResourceManager="*res://resource_manager.gd"
 GlobalConfig="*res://GlobalConfig.gd"
 GameState="*res://game_state.gd"
 SceneManager="*res://scene_manager.gd"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bedfm0vw6bvae"]
+[gd_scene load_steps=12 format=3 uid="uid://bedfm0vw6bvae"]
 
 [ext_resource type="PackedScene" uid="uid://cg6jym4e7e55y" path="res://dungeon_rooms/room_utils/door/door.tscn" id="1_m30rl"]
 [ext_resource type="Script" path="res://hub/hub.gd" id="1_vjet4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://m2srsaljg205" path="res://dungeon_rooms/dungeon_tile_map.tscn" id="5_vibfi"]
 [ext_resource type="PackedScene" uid="uid://c8kpqeqg8ijqj" path="res://character/NPC/RingKeeper/ring_keeper.tscn" id="6_ngtur"]
 [ext_resource type="PackedScene" uid="uid://f257c6ixuvhu" path="res://ui/level_screen/LevelScreen.tscn" id="7_huxdk"]
+[ext_resource type="AudioStream" uid="uid://bb3s1evejx714" path="res://music_and_sfx/hub_theme.mp3" id="8_plcqj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b8b56"]
 texture = ExtResource("3_vb8sc")
@@ -542,6 +543,7 @@ sources/0 = SubResource("TileSetAtlasSource_b8b56")
 sources/1 = SubResource("TileSetAtlasSource_jncoc")
 
 [node name="Hub" type="Node2D"]
+process_mode = 1
 texture_filter = 1
 script = ExtResource("1_vjet4")
 
@@ -575,3 +577,8 @@ layer_1/tile_data = PackedInt32Array(-917481, 131073, 7, -917482, 131073, 7, -91
 [node name="RingKeeper" parent="." instance=ExtResource("6_ngtur")]
 position = Vector2(-48, -8)
 ui_scene = ExtResource("7_huxdk")
+
+[node name="Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_plcqj")
+volume_db = -21.46
+autoplay = true

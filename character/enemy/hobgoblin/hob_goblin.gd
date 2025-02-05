@@ -30,7 +30,6 @@ func _physics_process(delta: float) -> void:
 		
 	var distance_to_player = global_position.distance_to(player.global_position)
 	update_state(distance_to_player)
-	print_debug(current_state)
 	match current_state:
 		State.CHASE:
 			chase_player()

@@ -32,12 +32,6 @@ offset_bottom = 122.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_irhne")
 
-[node name="Mana" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
-offset_left = 30.0
-offset_top = 38.0
-offset_right = -277.0
-offset_bottom = -178.0
-
 [node name="Health" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
 offset_top = 18.0
@@ -46,9 +40,9 @@ offset_bottom = -198.0
 
 [node name="Damage" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
-offset_top = 58.0
+offset_top = 48.0
 offset_right = -277.0
-offset_bottom = -158.0
+offset_bottom = -168.0
 
 [node name="Speed" parent="CanvasLayer" instance=ExtResource("3_ovmvv")]
 offset_left = 30.0
