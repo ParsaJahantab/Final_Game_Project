@@ -51,6 +51,10 @@ func _ready() -> void:
 		
 func initialize():
 	await get_tree().process_frame
+	is_dead = false
+	health_component.is_dead = false
+	is_hurt = false
+	is_attacking = false
 	movement_component.speed = GlobalConfig.BASE_PLAYER_ATTRIBUTES["SPEED"]
 	movement_component.change_stat(1.0,(GameState.player_speed_level-1)*3,"player")
 	health_component.max_health = GlobalConfig.BASE_PLAYER_ATTRIBUTES["HEALTH"]
@@ -77,6 +81,7 @@ func set_input_enable(is_enable : bool):
 func _physics_process(_delta: float) -> void:
 	
 	if is_dead:
+		print('here')
 		return
 	mouse_pos = get_global_mouse_position()
 	if is_input_enable:

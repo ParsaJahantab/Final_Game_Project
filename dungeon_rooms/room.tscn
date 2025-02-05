@@ -10,6 +10,8 @@ texture_filter = 1
 script = ExtResource("1_jmpsw")
 
 [node name="DungeonTileMap" parent="." instance=ExtResource("3_7b3t1")]
+layer_1/name = "Layer1"
+layer_2/name = "Layer2"
 
 [node name="Doors" type="Node2D" parent="."]
 

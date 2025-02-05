@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://c451avmrxmnl3"]
+
+[ext_resource type="Script" path="res://ui/win_screen/win_screen.gd" id="1_a04fy"]
+[ext_resource type="Texture2D" uid="uid://cf4b0c7fkgg3k" path="res://used_assests/gui/level_screen/panelInset_brown.png" id="2_f2x7q"]
+[ext_resource type="Texture2D" uid="uid://budino0n6pd6s" path="res://used_assests/gui/level_screen/panelInset_beige.png" id="3_innrq"]
+[ext_resource type="FontFile" uid="uid://d1ldf6dawr47l" path="res://assets/fonts/RingbearerMedium-51mgZ.ttf" id="4_5upka"]
+[ext_resource type="Texture2D" uid="uid://rn4xaxlm0smy" path="res://used_assests/gui/level_screen/iconCheck_bronze.png" id="5_4my11"]
+
+[node name="WinScreen" type="CanvasLayer"]
+scale = Vector2(0.903, 0.95)
+transform = Transform2D(0.903, 0, 0, 0.95, 0, 0)
+script = ExtResource("1_a04fy")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 111.578
+offset_top = 4.21053
+offset_right = 423.578
+offset_bottom = 244.211
+texture = ExtResource("2_f2x7q")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 124.578
+offset_top = 15.2105
+offset_right = 410.578
+offset_bottom = 234.211
+texture = ExtResource("3_innrq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 127.578
+offset_top = 17.2105
+offset_right = 407.578
+offset_bottom = 236.211
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_5upka")
+theme_override_font_sizes/font_size = 36
+text = "You Win"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Currency" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_5upka")
+text = "Currency"
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_4my11")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/CenterContainer/TextureButton" to="." method="_on_texture_button_pressed"]

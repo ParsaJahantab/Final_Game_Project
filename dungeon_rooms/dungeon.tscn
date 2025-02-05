@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dci57tininmp2"]
+[gd_scene load_steps=3 format=3 uid="uid://dci57tininmp2"]
 
 [ext_resource type="Script" path="res://dungeon_rooms/dungeon.gd" id="1_8jonh"]
+[ext_resource type="PackedScene" uid="uid://brsxiyqfxo3xv" path="res://ui/game_over/game_over_screen.tscn" id="2_litg6"]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_8jonh")
+
+[node name="GameOverScreen" parent="." instance=ExtResource("2_litg6")]
 
 [node name="Rooms" type="Node" parent="."]

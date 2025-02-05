@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://f257c6ixuvhu"]
 
-[ext_resource type="Texture2D" uid="uid://coq3kv8ws1xlu" path="res://used_assests/gui/level_screen/panel_brown.png" id="1_iu5kb"]
+[ext_resource type="Texture2D" uid="uid://dc1b5vobh5n0c" path="res://used_assests/gui/level_screen/panel_brown.png" id="1_iu5kb"]
 [ext_resource type="Script" path="res://ui/level_screen/LevelScreen.gd" id="1_xmihh"]
-[ext_resource type="Texture2D" uid="uid://dvr2a082t6d8e" path="res://used_assests/gui/level_screen/panel_beigeLight.png" id="2_irhne"]
+[ext_resource type="Texture2D" uid="uid://ffu4b7mmwude" path="res://used_assests/gui/level_screen/panel_beigeLight.png" id="2_irhne"]
 [ext_resource type="PackedScene" uid="uid://b0xdebxs6qh7m" path="res://ui/level_screen/single_level/single_level.tscn" id="3_ovmvv"]
-[ext_resource type="Texture2D" uid="uid://cgtxwje2r1fi3" path="res://used_assests/gui/level_screen/iconCheck_bronze.png" id="5_nai1g"]
+[ext_resource type="Texture2D" uid="uid://rn4xaxlm0smy" path="res://used_assests/gui/level_screen/iconCheck_bronze.png" id="5_nai1g"]
 
 [node name="LevelScreen" type="Control"]
 texture_filter = 1

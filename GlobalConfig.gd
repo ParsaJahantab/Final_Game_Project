@@ -57,4 +57,3 @@ const BASE_PLAYER_ATTRIBUTES : Dictionary = {
 	"SPEED" : 150,
 	
 }
-

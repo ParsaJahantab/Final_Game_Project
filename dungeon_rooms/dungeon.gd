@@ -2,6 +2,8 @@ extends Node2D
 class_name Dungeon
 
 var Room = preload("res://dungeon_rooms/room.tscn")  
+var Win_sc = preload("res://ui/win_screen/win_screen.tscn")
+
 var player: Player
 var tile_size = 16
 var min_size : int = 15
@@ -23,6 +25,7 @@ var room_diff
 var dungeon_bonus : int
 
 func _ready():
+	$GameOverScreen.hide()
 	player = $Player
 	if not player:
 		await get_tree().process_frame
@@ -118,10 +121,10 @@ func _draw():
 func on_player_exit(id,direction,exit):
 	if exit:
 		GameState.currency_change(GameState.temp_player_currency + dungeon_bonus)
-		GameState.temp_currency_change(GameState.temp_player_currency * -1)
 		if room_level == GameState.avaialble_levels:
 			GameState.avaialble_levels += 1
-		SceneManager.goto_scene("res://hub/hub.tscn",room_level)
+		var wsc = Win_sc.instantiate()
+		add_child(wsc)
 	elif current_room.player_been_here and current_room.is_player_in_the_room:
 		var opposites = {
 			"top": "down",
@@ -182,7 +185,9 @@ func change_room(index:int,direction):
 	camera.limit_bottom = current_room.position.y + ((current_room.tiles_y) * tile_size)
 
 func on_player_death():
-	player.initialize()
-	player.is_dead = false
-	GameState.temp_currency_change(GameState.temp_player_currency * -1)
-	SceneManager.goto_scene("res://hub/hub.tscn",room_level)
+	$GameOverScreen.show()
+	#get_tree().paused = true
+	if $GameOverScreen.restart_button_pressed:
+		player.initialize()
+		GameState.temp_currency_change(GameState.temp_player_currency * -1)
+		#get_tree().paused = false

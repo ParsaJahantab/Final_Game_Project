@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cvvy735hirreb" path="res://character/utils/health_component/character_health_component.tscn" id="1_gsbau"]
 [ext_resource type="PackedScene" uid="uid://da6xrlefp6it5" path="res://character/utils/movement_component/character_movement_component.tscn" id="2_17pqn"]
 [ext_resource type="PackedScene" uid="uid://ioofqe3pvypu" path="res://character/player/player_utils/animation_component/PlayerAnimationComponent.tscn" id="5_v424h"]
-[ext_resource type="Texture2D" uid="uid://d24v8vfkd04wu" path="res://used_assests/marker/crosshair_1.png" id="7_b3us0"]
+[ext_resource type="Texture2D" uid="uid://qk7swng72xjp" path="res://used_assests/marker/crosshair_1.png" id="7_b3us0"]
 [ext_resource type="PackedScene" uid="uid://djbcfaikbhp4j" path="res://character/player/player_utils/mana_component/player_mana_component.tscn" id="11_be6tu"]
-[ext_resource type="Texture2D" uid="uid://uw62sei3k1gk" path="res://used_assests/knight/used/knight.png" id="12_3qolv"]
+[ext_resource type="Texture2D" uid="uid://ce7colylwhl22" path="res://used_assests/knight/used/knight.png" id="12_3qolv"]
 
 [sub_resource type="Animation" id="Animation_5fhhu"]
 resource_name = "AxeHeavyAttack"
