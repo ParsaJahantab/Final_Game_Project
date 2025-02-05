@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ResourceManager="*res://resource_manager.gd"
 GlobalConfig="*res://GlobalConfig.gd"
 GameState="*res://game_state.gd"
 SceneManager="*res://scene_manager.gd"

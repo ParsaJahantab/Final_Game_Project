@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cg6jym4e7e55y"]
+[gd_scene load_steps=13 format=3 uid="uid://cg6jym4e7e55y"]
 
 [ext_resource type="Texture2D" uid="uid://cllfp4a18crk2" path="res://used_assests/door/door_spritesheet.png" id="1_u7yhp"]
 [ext_resource type="Script" path="res://dungeon_rooms/room_utils/door/door.gd" id="2_b7lc8"]
 [ext_resource type="Texture2D" uid="uid://d2fb7b8krm3g7" path="res://used_assests/door/door_closed.png" id="2_pr76h"]
 [ext_resource type="Texture2D" uid="uid://dxbgmkx0jf0h0" path="res://used_assests/door/door_fullyopen.png" id="3_uuxu6"]
+[ext_resource type="AudioStream" uid="uid://br1ut0cp1g7pf" path="res://music_and_sfx/door_closing.mp3" id="5_jjh8m"]
 
 [sub_resource type="Animation" id="Animation_e2kei"]
 length = 0.001
@@ -241,6 +242,9 @@ shape = SubResource("RectangleShape2D_gts5h")
 [node name="ExitCollisionShape2D" type="CollisionShape2D" parent="ExitArea2D"]
 position = Vector2(-1, -25)
 shape = SubResource("RectangleShape2D_m058x")
+
+[node name="DoorClosingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_jjh8m")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_body_entered"]

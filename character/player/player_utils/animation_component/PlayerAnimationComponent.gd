@@ -4,6 +4,7 @@ class_name PlayerAnimationComponent
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+
 var current_direction: String = "Right"
 var is_attacking: bool = false
 var is_rolling: bool = false
@@ -45,6 +46,8 @@ func play_run():
 		set_dircetion()
 		animation_player.play("run")
 		
+		
+		
 func play_idle() -> void :
 	set_dircetion()
 	animation_player.play("idle")
@@ -55,7 +58,7 @@ func play_hurt() -> void :
 		set_dircetion()
 		animation_player.play("hurt")
 
-func play_attack(weapon : String,attack_type:String) -> void:
+func play_attack(weapon : String,attack_type:String ) -> void:
 	if not is_attacking :
 		animation_player.stop()
 		is_attacking = true
@@ -69,6 +72,7 @@ func play_attack(weapon : String,attack_type:String) -> void:
 		if attack_type == "Heavy":
 			player.hit_box_collision.scale *=1.2 
 		animation_player.play(weapon+attack_type+ "Attack")
+		get_parent().play_weapon_sound(attack_type)
 		await animation_player.animation_finished
 		is_attacking = false
 		player.hit_box_collision.scale = Vector2(1,1)
@@ -79,6 +83,7 @@ func play_bow_attack():
 		is_attacking = true
 		set_direction_mouse()
 		animation_player.play("BowAttack")
+		get_parent().play_weapon_sound("Light")
 		await animation_player.animation_finished
 		is_attacking = false
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bs48uf1lnf2xo"]
+[gd_scene load_steps=18 format=3 uid="uid://bs48uf1lnf2xo"]
 
 [ext_resource type="PackedScene" uid="uid://dbt5m2uyw613v" path="res://character/enemy/enemy_base/enemy_base.tscn" id="1_mocsv"]
 [ext_resource type="Script" path="res://character/enemy/orc/orc.gd" id="2_2xn00"]
 [ext_resource type="Texture2D" uid="uid://ctjkqm6c7t2ke" path="res://used_assests/orc/Orc.png" id="2_lif7e"]
+[ext_resource type="AudioStream" uid="uid://bhe1wy80deias" path="res://music_and_sfx/orc_axe_attack2.mp3" id="4_qhqhi"]
 
 [sub_resource type="Animation" id="Animation_e1bnq"]
 length = 0.001
@@ -390,5 +391,8 @@ shape = SubResource("RectangleShape2D_jdtg3")
 [node name="HurtCollision" parent="hurtBox" index="0"]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_1key1")
+
+[node name="AttackSoundEffect" parent="." index="11"]
+stream = ExtResource("4_qhqhi")
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

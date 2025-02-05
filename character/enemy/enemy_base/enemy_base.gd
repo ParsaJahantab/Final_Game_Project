@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var combat_component: CharacterCombatComponent = $CharacterCombatComponent
 @onready var animation_component: CharacterAnimationComponent = $CharacterAnimationComponent
 @onready var currency_component: EnemyCurrencyComponent = $EnemyCurrencyComponent
+@onready var attack_sound_component: AudioStreamPlayer2D = $AttackSoundEffect
 @export var player: Node2D
 
 var is_hurt: bool = false
@@ -93,6 +94,9 @@ func _handle_death() -> void:
 
 func _on_attack_started() -> void:
 	animation_component.play("attack")
+	attack_sound_component.position = position
+	attack_sound_component.play()
+	
 
 func _on_timer_timeout():
 	navigation_component.make_path()

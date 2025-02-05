@@ -4,7 +4,6 @@ const INCREASE_MULTIPLIER := 1.2
 
 # Store attributes in a dictionary for easier management
 var attributes := {
-	"mana": null,
 	"health": null,
 	"damage": null,
 	"speed": null

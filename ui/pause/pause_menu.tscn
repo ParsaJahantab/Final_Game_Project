@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt0q46l0b36p7"]
+
+[ext_resource type="Script" path="res://ui/pause/pause_menu.gd" id="1_vberl"]
+[ext_resource type="Texture2D" uid="uid://dibag1waru7fv" path="res://used_assests/gui/level_screen/panelInset_beigeLight.png" id="2_qgkxw"]
+[ext_resource type="Texture2D" uid="uid://bvsnm3dqxdkir" path="res://used_assests/red.png" id="3_nhfmk"]
+[ext_resource type="Texture2D" uid="uid://dr1nkqd1nid8n" path="res://used_assests/red_pressed.png" id="4_ar2f2"]
+[ext_resource type="Texture2D" uid="uid://cwslyv01s2qnb" path="res://used_assests/green.png" id="5_yqtqt"]
+[ext_resource type="Texture2D" uid="uid://dmlmt3nkj52g" path="res://used_assests/green_pressed.png" id="6_k82ro"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vberl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer"]
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/CanvasLayer"]
+texture_filter = 1
+offset_left = 126.0
+offset_top = 37.0
+offset_right = 343.0
+offset_bottom = 187.0
+texture = ExtResource("2_qgkxw")
+
+[node name="ExitGameButton" type="TextureButton" parent="CanvasLayer/CanvasLayer"]
+texture_filter = 1
+offset_left = 142.0
+offset_top = 120.0
+offset_right = 326.0
+offset_bottom = 168.0
+texture_normal = ExtResource("3_nhfmk")
+texture_pressed = ExtResource("4_ar2f2")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasLayer/ExitGameButton"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 39.0
+text = "Exit"
+horizontal_alignment = 1
+
+[node name="ContinueGameButton" type="TextureButton" parent="CanvasLayer/CanvasLayer"]
+texture_filter = 1
+offset_left = 145.0
+offset_top = 60.0
+offset_right = 323.0
+offset_bottom = 108.0
+texture_normal = ExtResource("5_yqtqt")
+texture_pressed = ExtResource("6_k82ro")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasLayer/ContinueGameButton"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 152.0
+offset_bottom = 39.0
+text = "Continue Game"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/CanvasLayer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasLayer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]

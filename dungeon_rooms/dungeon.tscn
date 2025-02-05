@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://brsxiyqfxo3xv" path="res://ui/game_over/game_over_screen.tscn" id="2_litg6"]
 
 [node name="Dungeon" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_8jonh")
 
 [node name="GameOverScreen" parent="." instance=ExtResource("2_litg6")]

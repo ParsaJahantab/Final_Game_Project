@@ -16,6 +16,5 @@ func get_movement_direction() -> Vector2:
 
 func _process(_delta: float) -> void:
 	if can_process:
-		print("Hi")
 		if Input.is_action_just_pressed("attack"):
 			attack_pressed.emit()
