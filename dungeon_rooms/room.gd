@@ -373,7 +373,7 @@ func fill_floor_tiles() -> void:
 	_place_decorations()
 	spawn_enemies()
 	spawn_potions(HEALTH_POTION)
-	spawn_potions(MANA_POTION)
+	#spawn_potions(MANA_POTION)
 
 func _place_floor_tiles() -> void:
 	for x in range(tiles_x + 1):

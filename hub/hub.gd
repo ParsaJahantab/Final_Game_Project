@@ -5,6 +5,7 @@ class_name Hub
 var player: Player
 var HUD 
 var Hint = preload("res://ui/help_UI/help_screen.tscn")  
+@onready var hub_ost = $Theme
 
 static var player_added = false
 
@@ -73,8 +74,8 @@ func _ready():
 		hint.initialize(hints)
 		add_child(hint)
 		GameState.shown_hints.append("upgrade") 
-		
-		
+		hub_ost.loop = true
+		hub_ost.play()
 
 
 		
@@ -85,4 +86,5 @@ func _process(delta):
 	pass
 	
 func on_exit(level : int) -> void:
+	hub_ost.stop()
 	SceneManager.goto_scene("res://dungeon_rooms/dungeon.tscn",level)

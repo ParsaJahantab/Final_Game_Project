@@ -500,6 +500,7 @@ offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_7yenv")
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
 texture_filter = 1
@@ -508,6 +509,7 @@ offset_top = 32.0
 offset_right = 416.0
 offset_bottom = 216.0
 texture = ExtResource("2_m1pmo")
+metadata/_edit_use_anchors_ = true
 
 [node name="ExitGameButton" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
@@ -518,6 +520,7 @@ offset_bottom = 208.0
 texture_normal = ExtResource("3_jj6rj")
 texture_pressed = ExtResource("4_u6f1n")
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/ExitGameButton"]
 texture_filter = 1
@@ -528,6 +531,7 @@ offset_right = 112.0
 offset_bottom = 39.0
 text = "Exit"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="NewGameButton" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
@@ -538,6 +542,7 @@ offset_bottom = 152.0
 texture_normal = ExtResource("5_rl41d")
 texture_pressed = ExtResource("6_kl4hg")
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/NewGameButton"]
 texture_filter = 1
@@ -548,6 +553,7 @@ offset_right = 133.0
 offset_bottom = 39.0
 text = "New Game"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ContinueGameButton" type="TextureButton" parent="CanvasLayer"]
 texture_filter = 1
@@ -558,6 +564,7 @@ offset_bottom = 96.0
 texture_normal = ExtResource("8_llw4s")
 texture_pressed = ExtResource("9_j1x4o")
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/ContinueGameButton"]
 texture_filter = 1
@@ -568,6 +575,7 @@ offset_right = 152.0
 offset_bottom = 39.0
 text = "Continue Game"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

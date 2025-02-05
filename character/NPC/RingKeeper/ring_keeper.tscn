@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8kpqeqg8ijqj"]
+[gd_scene load_steps=10 format=3 uid="uid://c8kpqeqg8ijqj"]
 
 [ext_resource type="PackedScene" uid="uid://d1bf4b5ebng1b" path="res://character/NPC/base_NPC/BaseNPC.tscn" id="1_e36d0"]
 [ext_resource type="Texture2D" uid="uid://djljrwfbfsbba" path="res://used_assests/ring_keeper/ZealousPriest.png" id="2_vq4jg"]
@@ -40,6 +40,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfvqy"]
+size = Vector2(19, 22)
+
 [node name="RingKeeper" instance=ExtResource("1_e36d0")]
 texture_filter = 1
 position = Vector2(84, 35)
@@ -50,6 +53,12 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_wude4")
 animation = &"idle"
 frame_progress = 0.690155
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_sfvqy")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
